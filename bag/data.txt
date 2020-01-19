@@ -1,0 +1,1890 @@
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 0.0
+      y: 0.0
+      z: 3.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 0.0
+      y: 0.0
+      z: 3.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 0.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 0.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 0.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.707106796641
+      w: 0.707106765732
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 0.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.707106796641
+      w: 0.707106765732
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 4.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 4.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 0.0
+      y: 0.0
+      z: 3.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 0.0
+      y: 0.0
+      z: 3.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 0.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 0.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 0.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.707106796641
+      w: 0.707106765732
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 0.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.707106796641
+      w: 0.707106765732
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 0.0
+      y: 0.0
+      z: 3.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 0.0
+      y: 0.0
+      z: 3.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 0.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 0.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 0.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.707106796641
+      w: 0.707106765732
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 0.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.707106796641
+      w: 0.707106765732
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
+transforms: 
+  - 
+    translation: 
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    rotation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+velocities: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+accelerations: 
+  - 
+    linear: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+time_from_start: 
+  secs: 0
+  nsecs:         0
+---
