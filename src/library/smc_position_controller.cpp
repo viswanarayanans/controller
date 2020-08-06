@@ -14,9 +14,11 @@ http://www.apache.org/licenses/LICENSE-2.0
  * limitations under the License.
  */
 
-#include "viswa_control/smc_position_controller.h"
+#include "rrc_control/smc_position_controller.h"
+#include <eigen_conversions/eigen_msg.h>
 
-namespace viswa_control {
+
+namespace rrc_control {
 
 SmcPositionController::SmcPositionController()
     : initialized_params_(false),
@@ -87,7 +89,8 @@ void SmcPositionController::InitializeParameters() {
   initialized_params_ = true;
 }
 
-void SmcPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities) const {
+void SmcPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities, 
+                                                     msg_check::PlotDataMsg* data_out) const {
   assert(rotor_velocities);
   assert(initialized_params_);
 
@@ -101,14 +104,17 @@ void SmcPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velo
   }
 
   Eigen::Vector3d thrust_3d;
-  ComputeThrust(&thrust_3d);
+  ComputeThrust(&thrust_3d, data_out);
   // ROS_INFO("Thrust done");
 
   double thrust = thrust_3d.dot(odometry_.orientation.toRotationMatrix().col(2)); //Added by Viswa
+  data_out->thrust = thrust;
   ROS_INFO_STREAM(thrust);
 
   Eigen::Vector3d moments;
-  CalculateMoments(thrust_3d, &moments);
+  CalculateMoments(thrust_3d, &moments, data_out);
+  tf::vectorEigenToMsg(moments, data_out->moments);
+
 
   Eigen::Vector4d moment_thrust;
   moment_thrust.block<3, 1>(0, 0) = moments;
@@ -129,7 +135,8 @@ void SmcPositionController::SetTrajectoryPoint(
   controller_active_ = true;
 }
 
-void SmcPositionController::ComputeThrust(Eigen::Vector3d* thrust) const {
+void SmcPositionController::ComputeThrust(Eigen::Vector3d* thrust,
+                                          msg_check::PlotDataMsg* data_out) const {
   assert(thrust);
 
   Eigen::Vector3d position_error;
@@ -162,12 +169,20 @@ void SmcPositionController::ComputeThrust(Eigen::Vector3d* thrust) const {
 
 
   *thrust = up_cap - delTau_p;
+
+  tf::vectorEigenToMsg(position_error, data_out->position_error);
+  tf::vectorEigenToMsg(velocity_error, data_out->velocity_error);
+
+  tf::vectorEigenToMsg(kp, data_out->Kp_hat);
+  tf::vectorEigenToMsg(sp, data_out->sp);
+  tf::vectorEigenToMsg(delTau_p, data_out->delTau_p);
 }
 
 // Implementation from the T. Lee et al. paper
 // Control of complex maneuvers for a quadrotor UAV using geometric methods on SE(3)
 void SmcPositionController::CalculateMoments(Eigen::Vector3d force, 
-                        Eigen::Vector3d* moments) const {
+                        Eigen::Vector3d* moments,
+                        msg_check::PlotDataMsg* data_out) const {
   assert(moments);
   // ROS_INFO_STREAM("force" << force); 
   if (force[2] >= DBL_MAX || force[2] <= -DBL_MAX) {
@@ -238,6 +253,13 @@ void SmcPositionController::CalculateMoments(Eigen::Vector3d force,
                 kq[2]*Sigmoid(sq[2], controller_parameters_.var_pi_q_);
 
     *moments = uq_cap - delTau_q;
+
+    tf::vectorEigenToMsg(angle_error, data_out->angle_error);
+    tf::vectorEigenToMsg(angular_rate_error, data_out->angle_rate_error);
+
+    tf::vectorEigenToMsg(kq, data_out->Kq_hat_0);
+    tf::vectorEigenToMsg(sq, data_out->sq);
+    tf::vectorEigenToMsg(delTau_q, data_out->delTau_q);
   }
 }
 

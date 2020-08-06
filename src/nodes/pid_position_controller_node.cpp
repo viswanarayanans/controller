@@ -23,9 +23,9 @@
 
 #include "pid_position_controller_node.h"
 
-#include "viswa_control/parameters_ros.h"
+#include "rrc_control/parameters_ros.h"
 
-namespace viswa_control {
+namespace rrc_control {
 
 PidPositionControllerNode::PidPositionControllerNode(
   const ros::NodeHandle& nh, const ros::NodeHandle& private_nh)
@@ -51,6 +51,8 @@ PidPositionControllerNode::PidPositionControllerNode(
 
   motor_velocity_reference_pub_ = nh_.advertise<mav_msgs::Actuators>(
       mav_msgs::default_topics::COMMAND_ACTUATORS, 1);
+
+  plot_data_pub_ = nh_.advertise<msg_check::PlotDataMsg>("/data_out", 1);
 
   command_timer_ = nh_.createTimer(ros::Duration(0), &PidPositionControllerNode::TimedCommandCallback, this,
                                   true, false);
@@ -199,7 +201,7 @@ void PidPositionControllerNode::OdometryCallback(const nav_msgs::OdometryConstPt
   pid_position_controller_.SetOdometry(odometry);
 
   Eigen::VectorXd ref_rotor_velocities;
-  pid_position_controller_.CalculateRotorVelocities(&ref_rotor_velocities);
+  pid_position_controller_.CalculateRotorVelocities(&ref_rotor_velocities, &data_out_);
 
   // Todo(ffurrer): Do this in the conversions header.
   mav_msgs::ActuatorsPtr actuator_msg(new mav_msgs::Actuators);
@@ -208,8 +210,12 @@ void PidPositionControllerNode::OdometryCallback(const nav_msgs::OdometryConstPt
   for (int i = 0; i < ref_rotor_velocities.size(); i++)
     actuator_msg->angular_velocities.push_back(ref_rotor_velocities[i]);
   actuator_msg->header.stamp = odometry_msg->header.stamp;
+  data_out_.header.stamp = odometry_msg->header.stamp;
+
 
   motor_velocity_reference_pub_.publish(actuator_msg);
+  comm_.sendSerial(ref_rotor_velocities);
+  plot_data_pub_.publish(data_out_);
 }
                                                   
 void PidPositionControllerNode::PoseCallback(const geometry_msgs::PoseWithCovarianceStampedConstPtr& msg) {
@@ -220,7 +226,7 @@ void PidPositionControllerNode::PoseCallback(const geometry_msgs::PoseWithCovari
   pid_position_controller_.SetOdometry(odometry);
 
   Eigen::VectorXd ref_rotor_velocities;
-  pid_position_controller_.CalculateRotorVelocities(&ref_rotor_velocities);
+  pid_position_controller_.CalculateRotorVelocities(&ref_rotor_velocities, &data_out_);
 
   // Todo(ffurrer): Do this in the conversions header.
   mav_msgs::ActuatorsPtr actuator_msg(new mav_msgs::Actuators);
@@ -229,8 +235,12 @@ void PidPositionControllerNode::PoseCallback(const geometry_msgs::PoseWithCovari
   for (int i = 0; i < ref_rotor_velocities.size(); i++)
     actuator_msg->angular_velocities.push_back(ref_rotor_velocities[i]);
   actuator_msg->header.stamp = msg->header.stamp;
+  data_out_.header.stamp = msg->header.stamp;
+
 
   motor_velocity_reference_pub_.publish(actuator_msg);
+  // comm_.sendSerial(ref_rotor_velocities);
+  plot_data_pub_.publish(data_out_);
 }
 
 }
@@ -242,7 +252,7 @@ int main(int argc, char** argv) {
 
   ros::NodeHandle nh;
   ros::NodeHandle private_nh("~");
-  viswa_control::PidPositionControllerNode pid_position_controller_node(nh, private_nh);
+  rrc_control::PidPositionControllerNode pid_position_controller_node(nh, private_nh);
 
   ros::spin();
 

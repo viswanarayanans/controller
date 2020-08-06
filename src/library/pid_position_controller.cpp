@@ -14,9 +14,10 @@ http://www.apache.org/licenses/LICENSE-2.0
  * limitations under the License.
  */
 
-#include "viswa_control/pid_position_controller.h"
+#include "rrc_control/pid_position_controller.h"
+#include <eigen_conversions/eigen_msg.h>
 
-namespace viswa_control {
+namespace rrc_control {
 
 PidPositionController::PidPositionController()
     : initialized_params_(false),
@@ -70,7 +71,8 @@ void PidPositionController::InitializeParameters() {
   initialized_params_ = true;
 }
 
-void PidPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities) const {
+void PidPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities, 
+      msg_check::PlotDataMsg* data_out) const {
   assert(rotor_velocities);
   assert(initialized_params_);
 
@@ -84,13 +86,17 @@ void PidPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velo
   }
 
   Eigen::Vector3d acceleration;
-  ComputeDesiredAcceleration(&acceleration);
+  ComputeDesiredAcceleration(&acceleration, data_out);
 
   Eigen::Vector3d angular_acceleration;
-  ComputeDesiredAngularAcc(acceleration, &angular_acceleration);
+  ComputeDesiredAngularAcc(acceleration, &angular_acceleration, data_out);
 
   // Project thrust onto body z axis.
   double thrust = -normalized_mass * acceleration.dot(odometry_.orientation.toRotationMatrix().col(2)); //Added by Viswa
+
+  data_out->thrust = thrust;
+
+
 
   const Eigen::Matrix3d R_W_I = odometry_.orientation.toRotationMatrix(); //Added by Viswa
   double velocity_W =  (R_W_I * odometry_.velocity).z(); //Added by Viswa
@@ -106,7 +112,7 @@ void PidPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velo
   *rotor_velocities = angular_acc_to_rotor_velocities_ * angular_acceleration_thrust;
   *rotor_velocities = rotor_velocities->cwiseMax(Eigen::VectorXd::Zero(rotor_velocities->rows()));
   *rotor_velocities = rotor_velocities->cwiseSqrt();
-
+/*
   Eigen::Matrix4d I;
   I.setZero();
   I.block<3, 3>(0, 0) = vehicle_parameters_.inertia_;
@@ -170,7 +176,8 @@ void PidPositionController::SetTrajectoryPoint(
   controller_active_ = true;
 }
 
-void PidPositionController::ComputeDesiredAcceleration(Eigen::Vector3d* acceleration) const {
+void PidPositionController::ComputeDesiredAcceleration(Eigen::Vector3d* acceleration, 
+  msg_check::PlotDataMsg* data_out) const {
   assert(acceleration);
 
   Eigen::Vector3d position_error;
@@ -197,6 +204,10 @@ void PidPositionController::ComputeDesiredAcceleration(Eigen::Vector3d* accelera
       + position_error_integral.cwiseProduct(controller_parameters_.position_integral_gain_)) / normalized_mass
       - vehicle_parameters_.gravity_ * e_3 - command_trajectory_.acceleration_W; //Added by Viswa
   
+  tf::vectorEigenToMsg(*acceleration, data_out->acceleration);
+  tf::vectorEigenToMsg(position_error, data_out->position_error);
+  tf::vectorEigenToMsg(velocity_error, data_out->velocity_error);
+  tf::vectorEigenToMsg(position_error_integral, data_out->position_error_integral);
 
   //ROS_INFO("Mass : %f", normalized_mass);
 
@@ -206,7 +217,8 @@ void PidPositionController::ComputeDesiredAcceleration(Eigen::Vector3d* accelera
 // Implementation from the T. Pid et al. paper
 // Control of complex maneuvers for a quadrotor UAV using geometric methods on SE(3)
 void PidPositionController::ComputeDesiredAngularAcc(const Eigen::Vector3d& acceleration,
-                                                     Eigen::Vector3d* angular_acceleration) const {
+                                                     Eigen::Vector3d* angular_acceleration, 
+                                                     msg_check::PlotDataMsg* data_out) const {
   assert(angular_acceleration);
 
   Eigen::Matrix3d R = odometry_.orientation.toRotationMatrix();
@@ -244,6 +256,12 @@ void PidPositionController::ComputeDesiredAngularAcc(const Eigen::Vector3d& acce
   *angular_acceleration = -1 * angle_error.cwiseProduct(normalized_attitude_gain_)
                            - angular_rate_error.cwiseProduct(normalized_angular_rate_gain_)
                            + odometry_.angular_velocity.cross(odometry_.angular_velocity); // we don't need the inertia matrix here
+  // data_out->angular_acceleration = *angular_acceleration;
+  // data_out->angle_error = angle_error;
+  // data_out->angle_rate_error = angular_rate_error;
+  tf::vectorEigenToMsg(*angular_acceleration, data_out->angular_acceleration);
+  tf::vectorEigenToMsg(angle_error, data_out->angle_error);
+  tf::vectorEigenToMsg(angular_rate_error, data_out->angle_rate_error);
 }
 
 

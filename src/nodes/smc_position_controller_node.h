@@ -1,7 +1,7 @@
 
 
-#ifndef ASMC_CONTROL_SMC_POSITION_CONTROLLER_NODE_H
-#define ASMC_CONTROL_SMC_POSITION_CONTROLLER_NODE_H
+#ifndef RRC_CONTROL_SMC_POSITION_CONTROLLER_NODE_H
+#define RRC_CONTROL_SMC_POSITION_CONTROLLER_NODE_H
 
 
 #include <boost/bind.hpp>
@@ -17,10 +17,13 @@
 #include <ros/ros.h>
 #include <trajectory_msgs/MultiDOFJointTrajectory.h>
 
-#include "viswa_control/common.h"
-#include "viswa_control/smc_position_controller.h"
+#include "rrc_control/common.h"
+#include "rrc_control/smc_position_controller.h"
+#include "msg_check/PlotDataMsg.h"
+#include <serial_comm.h>
 
-namespace viswa_control {
+
+namespace rrc_control {
 	class SmcPositionControllerNode{
 	public:
 		SmcPositionControllerNode(const ros::NodeHandle& nh, const ros::NodeHandle& private_nh);
@@ -32,12 +35,15 @@ namespace viswa_control {
 		ros::NodeHandle private_nh_;
 
 		SmcPositionController position_controller_;
+		msg_check::PlotDataMsg data_out_;
+  		SerialComm comm_;
 
 		ros::Subscriber cmd_mdj_traj_sub_;
 		ros::Subscriber cmd_odom_sub_;
 	  	ros::Subscriber pose_sub_;
 
 		ros::Publisher motor_vel_pub_;
+  		ros::Publisher plot_data_pub_;
 
 		mav_msgs::EigenTrajectoryPointDeque commands_;
 		std::deque<ros::Duration> command_waiting_times_;

@@ -1,7 +1,7 @@
 <package>
-  <name>viswa_control</name>
+  <name>rrc_control</name>
   <version>2.1.2</version>
-  <description>Viswa control package</description>
+  <description>rrc control package</description>
 
   <maintainer email="fadri.furrer@mavt.ethz.ch">Fadri Furrer</maintainer>
   <maintainer email="mina.kamel@mavt.ethz.ch">Mina Kamel</maintainer>
@@ -26,6 +26,11 @@
   <build_depend>rospy</build_depend>
   <build_depend>sensor_msgs</build_depend>
   <build_depend>cmake_modules</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>eigen_conversions</build_depend>
+  <build_depend>serial_comm</build_depend>
+  <build_depend>msg_check</build_depend>
+  <build_depend>mav_trajectory_generation_ros</build_depend>
   <!-- <build_depend>apriltag</build_depend> -->
   <!-- <build_depend>apriltag_ros</build_depend> -->
 
@@ -35,9 +40,15 @@
   <run_depend>mav_msgs</run_depend>
   <run_depend>nav_msgs</run_depend>
   <run_depend>roscpp</run_depend>
+  <run_depend>rospy</run_depend>
   <run_depend>sensor_msgs</run_depend>
   <!-- <run_depend>apriltag</run_depend>
   <run_depend>apriltag_ros</run_depend> -->
+  <run_depend>message_runtime</run_depend>
+  <run_depend>eigen_conversions</run_depend>
+  <run_depend>serial_comm</run_depend>
+  <run_depend>msg_check</run_depend>
+  <run_depend>mav_trajectory_generation_ros</run_depend>
 
 
 </package>

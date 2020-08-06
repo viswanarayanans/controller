@@ -1,19 +1,20 @@
 # Decent
-m_cap: 2.32
+m_cap: 2.0
 
 length: 0.3
 side: 0.2
 gravity: 9.81
-arm_length: 0.24
-rotor_mass: 0.08
-payload: 0.5
+arm_length: 0.21
+rotor_mass: 0.01
+payload: 0.4
+payload_mass: 0.4
 
 eeta_p: {x: 4, y: 4, z: 4}
 eeta_q: 0.3
 var_pi_p: 1
 var_pi_q: 1
 theta_p: {x: 3, y: 3, z: 3}
-theta_q: {x: 4, y: 4, z: 4}
+theta_q: {x: 3, y: 3, z: 3}
 
 
 # Default

@@ -3,9 +3,9 @@
 
 #include "smc_position_controller_node.h"
 
-#include "viswa_control/parameters_ros.h"
+#include "rrc_control/parameters_ros.h"
 
-namespace viswa_control {
+namespace rrc_control {
 	SmcPositionControllerNode::SmcPositionControllerNode(
 		const ros::NodeHandle& nh, const ros::NodeHandle& private_nh)
 	:nh_(nh), private_nh_(private_nh) {
@@ -21,6 +21,9 @@ namespace viswa_control {
 
 		motor_vel_pub_ = nh_.advertise<mav_msgs::Actuators>(
 			mav_msgs::default_topics::COMMAND_ACTUATORS, 1);
+
+  		plot_data_pub_ = nh_.advertise<msg_check::PlotDataMsg>("/data_out", 1);
+
 
 		command_timer_ = nh_.createTimer(ros::Duration(0), &SmcPositionControllerNode::TimedCallback, this,
 			true, false);
@@ -176,7 +179,7 @@ namespace viswa_control {
 		position_controller_.SetOdometry(odometry);
 
 		Eigen::VectorXd ref_rotor_velocities;
-		position_controller_.CalculateRotorVelocities(&ref_rotor_velocities);
+		position_controller_.CalculateRotorVelocities(&ref_rotor_velocities, &data_out_);
 
 		// Todo(ffurrer): Do this in the conversions header.
 		mav_msgs::ActuatorsPtr actuator_msg(new mav_msgs::Actuators);
@@ -185,8 +188,11 @@ namespace viswa_control {
 		for (int i = 0; i < ref_rotor_velocities.size(); i++)
 		  actuator_msg->angular_velocities.push_back(ref_rotor_velocities[i]);
 		actuator_msg->header.stamp = odometry_msg->header.stamp;
+		data_out_.header.stamp = odometry_msg->header.stamp;
 
 		motor_vel_pub_.publish(actuator_msg);
+	  	comm_.sendSerial(ref_rotor_velocities);
+	  	plot_data_pub_.publish(data_out_);
 
 	}
 
@@ -216,7 +222,7 @@ namespace viswa_control {
 	  position_controller_.SetOdometry(odometry);
 
 	  Eigen::VectorXd ref_rotor_velocities;
-	  position_controller_.CalculateRotorVelocities(&ref_rotor_velocities);
+	  position_controller_.CalculateRotorVelocities(&ref_rotor_velocities, &data_out_);
 
 	  // Todo(ffurrer): Do this in the conversions header.
 	  mav_msgs::ActuatorsPtr actuator_msg(new mav_msgs::Actuators);
@@ -225,8 +231,12 @@ namespace viswa_control {
 	  for (int i = 0; i < ref_rotor_velocities.size(); i++)
 	    actuator_msg->angular_velocities.push_back(ref_rotor_velocities[i]);
 	  actuator_msg->header.stamp = msg->header.stamp;
+	  data_out_.header.stamp = msg->header.stamp;
+
 
 	  motor_vel_pub_.publish(actuator_msg);
+	  // comm_.sendSerial(ref_rotor_velocities);
+	  plot_data_pub_.publish(data_out_);
 	}
 
 
@@ -237,7 +247,7 @@ int main(int argc, char** argv) {
 
   ros::NodeHandle nh;
   ros::NodeHandle private_nh("~");
-  viswa_control::SmcPositionControllerNode smc_position_controller_node(nh, private_nh);
+  rrc_control::SmcPositionControllerNode smc_position_controller_node(nh, private_nh);
 
   ros::spin();
 

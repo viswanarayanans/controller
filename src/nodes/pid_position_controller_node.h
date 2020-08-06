@@ -18,8 +18,8 @@
  * limitations under the License.
  */
 
-#ifndef VISWA_CONTROL_PID_POSITION_CONTROLLER_NODE_H
-#define VISWA_CONTROL_PID_POSITION_CONTROLLER_NODE_H
+#ifndef RRC_CONTROL_PID_POSITION_CONTROLLER_NODE_H
+#define RRC_CONTROL_PID_POSITION_CONTROLLER_NODE_H
 
 #include <boost/bind.hpp>
 #include <Eigen/Eigen>
@@ -36,10 +36,13 @@
 #include <trajectory_msgs/MultiDOFJointTrajectory.h>
 //#include <apriltag_ros/AprilTagDetectionArray.h>
 
-#include "viswa_control/common.h"
-#include "viswa_control/pid_position_controller.h"
+#include "rrc_control/common.h"
+#include "rrc_control/pid_position_controller.h"
+#include "msg_check/PlotDataMsg.h"
+#include <serial_comm.h>
 
-namespace viswa_control {
+
+namespace rrc_control {
 
 class PidPositionControllerNode {
  public:
@@ -56,6 +59,8 @@ class PidPositionControllerNode {
   ros::NodeHandle nhs_;
 
   PidPositionController pid_position_controller_;
+  msg_check::PlotDataMsg data_out_;
+  SerialComm comm_;
 
   std::string namespace_;
 
@@ -67,6 +72,7 @@ class PidPositionControllerNode {
   ros::Subscriber pose_sub_;
 
   ros::Publisher motor_velocity_reference_pub_;
+  ros::Publisher plot_data_pub_;
 
   mav_msgs::EigenTrajectoryPointDeque commands_;
   std::deque<ros::Duration> command_waiting_times_;
@@ -91,4 +97,4 @@ class PidPositionControllerNode {
 }
 
 
-#endif // VISWA_CONTROL_PID_POSITION_CONTROLLER_NODE_H
+#endif // RRC_CONTROL_PID_POSITION_CONTROLLER_NODE_H

@@ -17,7 +17,7 @@
       <remap from="odometry" to="odometry_sensor1/odometry" />
     </node>  -->
 
-    <node name="hovering_example" pkg="viswa_control" type="hovering_example" output="screen"/>
+    <node name="hovering_smooth" pkg="viswa_control" type="hovering_example" output="screen"/>
 <!--    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> -->
    <!-- <node pkg="tf" type="static_transform_publisher" name="ime_slam_camera_tf" args="0.2 0.0 0.05 -1.58 0 -1.58 /iris/base_link /iris/kinect_link_optical 100"/> -->
