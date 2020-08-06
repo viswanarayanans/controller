@@ -14,9 +14,11 @@ http://www.apache.org/licenses/LICENSE-2.0
  * limitations under the License.
  */
 
-#include "viswa_control/asmc_position_controller.h"
+#include "rrc_control/asmc_position_controller.h"
+#include <eigen_conversions/eigen_msg.h>
 
-namespace viswa_control {
+
+namespace rrc_control {
 
 ASmcPositionController::ASmcPositionController()
     : initialized_params_(false),
@@ -58,7 +60,8 @@ void ASmcPositionController::InitializeParameters() {
   initialized_params_ = true;
 }
 
-void ASmcPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities) const {
+void ASmcPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities, 
+                        msg_check::PlotDataMsg* data_out) const {
   assert(rotor_velocities);
   assert(initialized_params_);
 
@@ -72,14 +75,18 @@ void ASmcPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_vel
   }
 
   Eigen::Vector3d thrust_3d;
-  CalculateThrust(&thrust_3d);
+  CalculateThrust(&thrust_3d, data_out);
   // ROS_INFO("Thrust done");
 
   double thrust = thrust_3d.dot(odometry_.orientation.toRotationMatrix().col(2)); //Added by Viswa
   ROS_INFO_STREAM(thrust);
+  data_out->thrust = thrust;
+
 
   Eigen::Vector3d moments;
-  CalculateMoments(thrust_3d, &moments);
+  CalculateMoments(thrust_3d, &moments, data_out);
+  tf::vectorEigenToMsg(moments, data_out->moments);
+
 
   // Project thrust onto body z axis.
 
@@ -161,7 +168,8 @@ void ASmcPositionController::SetTrajectoryPoint(
   controller_active_ = true;
 }
 
-void ASmcPositionController::CalculateThrust(Eigen::Vector3d* thrust) const {
+void ASmcPositionController::CalculateThrust(Eigen::Vector3d* thrust, 
+                        msg_check::PlotDataMsg* data_out) const {
   assert(thrust);
 
   Eigen::Vector3d position_error;
@@ -215,38 +223,26 @@ void ASmcPositionController::CalculateThrust(Eigen::Vector3d* thrust) const {
   delTau_p << rho_p[0]*Sigmoid(sp[0], controller_parameters_.var_pi_p_), 
 				  rho_p[1]*Sigmoid(sp[1], controller_parameters_.var_pi_p_), 
 				  rho_p[2]*Sigmoid(sp[2], controller_parameters_.var_pi_p_);
-  // ROS_INFO_STREAM(delTau_p);
-
-  // Sigmoid(sp[0], &sat[0]);
-  // Sigmoid(sp[1], &sat[1]);
-  // Sigmoid(sp[2], &sat[2]);
-
-  // delTau_p << 0, 0, 0;
-
+  
   *thrust =  -lam_p*sp - delTau_p + hatM*vehicle_parameters_.gravity_*e_3;
+  
+  // tf::vectorEigenToMsg(*acceleration, data_out->acceleration);
+  tf::vectorEigenToMsg(position_error, data_out->position_error);
+  tf::vectorEigenToMsg(velocity_error, data_out->velocity_error);
 
-  // ROS_INFO_STREAM(*thrust);
-  // *thrust = -lam_p*sp + Eigen::Vector3d(0,0,19.6);
+  tf::vectorEigenToMsg(hatKp, data_out->Kp_hat);
+  tf::vectorEigenToMsg(sp, data_out->sp);
+  tf::vectorEigenToMsg(rho_p, data_out->rho_p);
+  tf::vectorEigenToMsg(delTau_p, data_out->delTau_p);
 
-  // ROS_INFO_STREAM("Thrust: "<< *thrust);
-
-
-
-  // *acceleration = (position_error.cwiseProduct(controller_parameters_.position_gain_)
-  //   + velocity_error.cwiseProduct(controller_parameters_.velocity_gain_)
-  //   + position_error_integral.cwiseProduct(controller_parameters_.position_integral_gain_)) / normalized_mass
-  //   - vehicle_parameters_.gravity_ * e_3 - command_trajectory_.acceleration_W; //Added by Viswa
-
-
-  //ROS_INFO("Mass : %f", normalized_mass);
-
-  //ROS_INFO("Mass of Iris: %f, %f", vehicle_parameters_.mass_, vehicle_parameters_.payload_mass_); //Added by Viswa
+  data_out->M_hat = hatM;
 }
 
 // Implementation from the T. Lee et al. paper
 // Control of complex maneuvers for a quadrotor UAV using geometric methods on SE(3)
 void ASmcPositionController::CalculateMoments(Eigen::Vector3d force, 
-												Eigen::Vector3d* moments) const {
+												Eigen::Vector3d* moments, 
+                        msg_check::PlotDataMsg* data_out) const {
   assert(moments);
   // ROS_INFO_STREAM("force" << force);	
   if (force[2] >= DBL_MAX || force[2] <= -DBL_MAX) {
@@ -391,6 +387,17 @@ void ASmcPositionController::CalculateMoments(Eigen::Vector3d force,
 	  // ROS_INFO_STREAM(lam_q);
 
 	  *moments = -controller_parameters_.lam_q_.cwiseProduct(sq) - delTau_q;
+    // tf::vectorEigenToMsg(*angular_acceleration, data_out->angular_acceleration);
+    tf::vectorEigenToMsg(angle_error, data_out->angle_error);
+    tf::vectorEigenToMsg(angular_rate_error, data_out->angle_rate_error);
+
+    tf::vectorEigenToMsg(hatKq_0, data_out->Kq_hat_0);
+    tf::vectorEigenToMsg(hatKq_1, data_out->Kq_hat_1);
+    tf::vectorEigenToMsg(hatKq_2, data_out->Kq_hat_2);
+    tf::vectorEigenToMsg(sq, data_out->sq);
+    tf::vectorEigenToMsg(rho_q, data_out->rho_q);
+    tf::vectorEigenToMsg(delTau_q, data_out->delTau_q);
+
 
 	  // *moments = -controller_parameters_.lam_q_.cwiseProduct(sq) ;
 	  // ROS_INFO_STREAM(*moments);
