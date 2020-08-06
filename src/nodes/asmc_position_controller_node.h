@@ -1,7 +1,7 @@
 
 
-#ifndef VISWA_CONTROL_ASMC_POSITION_CONTROLLER_NODE_H
-#define VISWA_CONTROL_ASMC_POSITION_CONTROLLER_NODE_H
+#ifndef RRC_CONTROL_ASMC_POSITION_CONTROLLER_NODE_H
+#define RRC_CONTROL_ASMC_POSITION_CONTROLLER_NODE_H
 
 
 #include <boost/bind.hpp>
@@ -17,10 +17,12 @@
 #include <ros/ros.h>
 #include <trajectory_msgs/MultiDOFJointTrajectory.h>
 
-#include "viswa_control/common.h"
-#include "viswa_control/asmc_position_controller.h"
+#include "rrc_control/common.h"
+#include "rrc_control/asmc_position_controller.h"
+#include "msg_check/PlotDataMsg.h"
+#include <serial_comm.h>
 
-namespace viswa_control {
+namespace rrc_control {
 	class ASmcPositionControllerNode{
 	public:
 		ASmcPositionControllerNode(const ros::NodeHandle& nh, const ros::NodeHandle& private_nh);
@@ -32,12 +34,15 @@ namespace viswa_control {
 		ros::NodeHandle private_nh_;
 
 		ASmcPositionController position_controller_;
+		msg_check::PlotDataMsg data_out_;
+  		SerialComm comm_;
 
 		ros::Subscriber cmd_mdj_traj_sub_;
 		ros::Subscriber cmd_odom_sub_;
 	  	ros::Subscriber pose_sub_;
 
 		ros::Publisher motor_vel_pub_;
+  		ros::Publisher plot_data_pub_;
 
 		mav_msgs::EigenTrajectoryPointDeque commands_;
 		std::deque<ros::Duration> command_waiting_times_;
@@ -50,7 +55,6 @@ namespace viswa_control {
 		void TimedCallback(const ros::TimerEvent& e);
 		void OdometryCallback(const nav_msgs::OdometryConstPtr& odometry_msg);
   		void PoseCallback(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg);
-
 	};
 
 }
