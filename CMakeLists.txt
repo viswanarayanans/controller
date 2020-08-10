@@ -28,7 +28,7 @@ generate_messages(
 
 catkin_package(
   INCLUDE_DIRS include ${Eigen_INCLUDE_DIRS}
-  LIBRARIES  pid_position_controller smc_position_controller asmc_position_controlle autde_position_controller
+  LIBRARIES  pid_position_controller smc_position_controller asmc_position_controller autde_position_controller reconfig_pid_controller
   CATKIN_DEPENDS geometry_msgs mav_msgs nav_msgs roscpp rospy sensor_msgs
       message_runtime serial_comm mav_trajectory_generation_ros msg_check
   DEPENDS Eigen
@@ -42,6 +42,10 @@ include_directories(
 
 add_library(pid_position_controller
   src/library/pid_position_controller.cpp
+)
+
+add_library(reconfig_pid_controller
+  src/library/reconfig_pid_controller.cpp
 )
 
 # add_library(roll_pitch_yawrate_thrust_controller
@@ -63,6 +67,9 @@ add_library(autde_position_controller
 target_link_libraries(pid_position_controller ${catkin_LIBRARIES})
 add_dependencies(pid_position_controller ${catkin_EXPORTED_TARGETS})
 
+target_link_libraries(reconfig_pid_controller ${catkin_LIBRARIES})
+add_dependencies(reconfig_pid_controller ${catkin_EXPORTED_TARGETS})
+
 # target_link_libraries(roll_pitch_yawrate_thrust_controller ${catkin_LIBRARIES})
 # add_dependencies(roll_pitch_yawrate_thrust_controller ${catkin_EXPORTED_TARGETS})
 
@@ -80,6 +87,11 @@ add_executable(pid_position_controller_node src/nodes/pid_position_controller_no
 add_dependencies(pid_position_controller_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(pid_position_controller_node
   pid_position_controller ${catkin_LIBRARIES})
+
+add_executable(reconfig_pid_controller_node src/nodes/reconfig_pid_controller_node.cpp)
+add_dependencies(reconfig_pid_controller_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(reconfig_pid_controller_node
+  reconfig_pid_controller ${catkin_LIBRARIES})
 
 # add_executable(roll_pitch_yawrate_thrust_controller_node
 #   src/nodes/roll_pitch_yawrate_thrust_controller_node.cpp)
@@ -135,12 +147,12 @@ foreach(dir launch resource)
 endforeach(dir)
 
 
-install(TARGETS pid_position_controller smc_position_controller asmc_position_controller autde_position_controller
+install(TARGETS pid_position_controller smc_position_controller asmc_position_controller autde_position_controller reconfig_pid_controller
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 )
 
 install(TARGETS pid_position_controller_node asmc_position_controller_node autde_position_controller_node
- smc_position_controller_node waypoint_publisher hovering_example hovering_smooth points_publisher
+ smc_position_controller_node waypoint_publisher hovering_example hovering_smooth points_publisher reconfig_pid_controller
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

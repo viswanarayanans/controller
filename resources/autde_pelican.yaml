@@ -1,20 +1,20 @@
-Kpp: {x: 1, y: 1, z: 1}
-Kdp: {x: 1, y: 1, z: 1}
+Kpp: {x: 4, y: 4, z: 4}
+Kdp: {x: 2.7, y: 2.7, z: 2.7}
 Kpq: {x: 1, y: 1, z: 0.035}
 Kdq: {x: 0.22, y: 0.22, z: 0.01}
 theta_p: {x: 3, y: 3, z: 3}
 theta_q: {x: 3, y: 3, z: 3}
 gamma_p: 0.1
 gamma_q: 0.1
-var_pi_p: 0.5
+var_pi_p: 1
 var_pi_q: 1
 hatM: 0.01
-hatKp_0: 0.1
-hatKp_1: 0.1
+hatKp_0: 10
+hatKp_1: 10
 hatKq_0: 0.001
 hatKq_1: 0.001
-alphaM: 1
+alphaM: 10
 alpha_p0: 20
 alpha_p1: 40
-alpha_q0: 0.1
-alpha_q1: 0.1
+alpha_q0: 10
+alpha_q1: 10

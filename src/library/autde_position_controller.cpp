@@ -77,8 +77,8 @@ void AuTdePositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_ve
   static Eigen::Vector3d thrust_3d(0,0,0);
   CalculateThrust(&thrust_3d, data_out);
   // ROS_INFO_STREAM("Thrust done"<<thrust_3d);
-  if(thrust_3d[2]<1){
-    thrust_3d[2] = 1;
+  if(thrust_3d[2]<-1){
+    thrust_3d[2] = -1;
   }
 
   double thrust = thrust_3d.dot(odometry_.orientation.toRotationMatrix().col(2)); //Added by Viswa
