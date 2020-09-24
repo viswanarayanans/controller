@@ -30,46 +30,20 @@
       <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
       <arg name="log_file" value="$(arg log_file)"/>
     </include>
-      <!-- <arg name="mav_name" value="box" /> -->
-      <!-- <arg name="model" value="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo" /> -->
-      <!-- <arg name="enable_logging" value="$(arg enable_logging)" /> -->
-      <!-- <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" /> -->
-      <!-- <arg name="log_file" value="$(arg log_file)"/> -->
-    <!-- </include> -->
-    <!-- <node name="pid_position_controller_node" pkg="rrc_control" type="pid_position_controller_node" output="screen">
-      <rosparam command="load" file="$(find rrc_control)/resources/pid_controller_$(arg mav_name).yaml" />
-      <rosparam command="load" file="$(find rrc_control)/resources/$(arg mav_name).yaml" />
-      <remap from="odometry" to="odometry_sensor1/odometry" />
-    </node>   -->
-    <node name="pid_position_controller_node" pkg="rrc_control" type="pid_position_controller_node" output="screen">
-      <rosparam command="load" file="$(find rrc_control)/resources/pid_controller_$(arg mav_name).yaml" />
-      <rosparam command="load" file="$(find rrc_control)/resources/$(arg mav_name).yaml" />
+    <node name="pid_position_controller_node" pkg="rrc_control" type="reconfig_pid_controller_node" output="screen">
+      <rosparam command="load" file="$(find rrc_control)/resources/reconfig__pid_controller_$(arg mav_name).yaml" />
+      <rosparam command="load" file="$(find rrc_control)/resources/$reconfig_(arg mav_name).yaml" />
       <remap from="odometry" to="odometry_sensor1/odometry" />
     </node>  
 <!--     <node name="asmc_position_controller_node" pkg="asmc_control" type="asmc_position_controller_node" output="screen">
-      <rosparam command="load" file="$(find rotors_gazebo)/resource/asmc_$(arg mav_name).yaml" />
-      <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
+      <rosparam command="load" file="$(find rotors_gazebo)/resource/reconfig_asmc_$(arg mav_name).yaml" />
+      <rosparam command="load" file="$(find rotors_gazebo)/resource/reconfig_$(arg mav_name).yaml" />
       <remap from="odometry" to="odometry_sensor1/odometry" />
     </node>  
  -->
     <node name="hovering_example" pkg="rotors_gazebo" type="hovering_example" output="screen"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-   <!-- <node pkg="tf" type="static_transform_publisher" name="ime_slam_camera_tf" args="0.2 0.0 0.05 -1.58 0 -1.58 /iris/base_link /iris/kinect_link_optical 100"/> -->
-    <!--<node type="laser_scan_assembler" pkg="laser_assembler"
-          name="laser_assembler">
-      <remap from="scan" to="/scan"/>
-      <param name="max_scans" type="int" value="400" />
-      <param name="fixed_frame" type="string" value="/world" />
-    </node>
-
-    <node pkg="rotors_control" type="periodic_snapshotter" output="screen" name="periodic_snapshotter" /> -->
-<!-- 
-   <node pkg="rotors_control" type="pcl_pcl2" name="pcl_boy" output="screen"/>
-   -->
-   <!-- <node pkg="path_planning" type="goal_transform" name="goal" output="screen"/> -->
-   <!-- <node pkg="path_planning" type="path_planning_node" name="path" output="screen"/> -->
-   <!-- <node pkg="mav_trajectory_generation_ros" type="tg_new" name="tgen" output="screen"/> -->
  
 
     <!-- Convert xacro and put on parameter server -->
@@ -82,3 +56,4 @@
   <include file="$(find rotors_gazebo)/launch/spawn_box.launch"/>
 
 </launch>
+a

@@ -102,45 +102,125 @@ namespace rrc_control {
                   position_controller_.controller_parameters_.hatM_,
                   &position_controller_.controller_parameters_.hatM_);
 
-		GetRosParameter(private_nh_, "alpha_p0",
-                  position_controller_.controller_parameters_.alpha_p0_,
-                  &position_controller_.controller_parameters_.alpha_p0_);
+		GetRosParameter(private_nh_, "alpha_p0/x",
+                  position_controller_.controller_parameters_.alpha_p0_.x(),
+                  &position_controller_.controller_parameters_.alpha_p0_.x());
 
-		GetRosParameter(private_nh_, "alpha_p1",
-                  position_controller_.controller_parameters_.alpha_p1_,
-                  &position_controller_.controller_parameters_.alpha_p1_);
+		GetRosParameter(private_nh_, "alpha_p0/y",
+                  position_controller_.controller_parameters_.alpha_p0_.y(),
+                  &position_controller_.controller_parameters_.alpha_p0_.y());
 
-		GetRosParameter(private_nh_, "alpha_q0",
-                  position_controller_.controller_parameters_.alpha_q0_,
-                  &position_controller_.controller_parameters_.alpha_q0_);
+		GetRosParameter(private_nh_, "alpha_p0/z",
+                  position_controller_.controller_parameters_.alpha_p0_.z(),
+                  &position_controller_.controller_parameters_.alpha_p0_.z());
 
-		GetRosParameter(private_nh_, "alpha_q1",
-                  position_controller_.controller_parameters_.alpha_p1_,
-                  &position_controller_.controller_parameters_.alpha_p1_);
+		GetRosParameter(private_nh_, "alpha_p1/x",
+                  position_controller_.controller_parameters_.alpha_p1_.x(),
+                  &position_controller_.controller_parameters_.alpha_p1_.x());
 
-		GetRosParameter(private_nh_, "hatKp_0",
-                  position_controller_.controller_parameters_.hatKp_0_,
-                  &position_controller_.controller_parameters_.hatKp_0_);
+		GetRosParameter(private_nh_, "alpha_p1/y",
+                  position_controller_.controller_parameters_.alpha_p1_.y(),
+                  &position_controller_.controller_parameters_.alpha_p1_.y());
 
-		GetRosParameter(private_nh_, "hatKp_1",
-                  position_controller_.controller_parameters_.hatKp_1_,
-                  &position_controller_.controller_parameters_.hatKp_1_);
+		GetRosParameter(private_nh_, "alpha_p1/z",
+                  position_controller_.controller_parameters_.alpha_p1_.z(),
+                  &position_controller_.controller_parameters_.alpha_p1_.z());
 
-		GetRosParameter(private_nh_, "hatKq_0",
-                  position_controller_.controller_parameters_.hatKq_0_,
-                  &position_controller_.controller_parameters_.hatKq_0_);
+		GetRosParameter(private_nh_, "alpha_q0/x",
+                  position_controller_.controller_parameters_.alpha_q0_.x(),
+                  &position_controller_.controller_parameters_.alpha_q0_.x());
 
-		GetRosParameter(private_nh_, "hatKq_1",
-                  position_controller_.controller_parameters_.hatKq_1_,
-                  &position_controller_.controller_parameters_.hatKq_1_);
+		GetRosParameter(private_nh_, "alpha_q0/y",
+                  position_controller_.controller_parameters_.alpha_q0_.y(),
+                  &position_controller_.controller_parameters_.alpha_q0_.y());
 
-		GetRosParameter(private_nh_, "gamma_p",
-                  position_controller_.controller_parameters_.gamma_p_,
-                  &position_controller_.controller_parameters_.gamma_p_);
+		GetRosParameter(private_nh_, "alpha_q0/z",
+                  position_controller_.controller_parameters_.alpha_q0_.z(),
+                  &position_controller_.controller_parameters_.alpha_q0_.z());
 
-		GetRosParameter(private_nh_, "gamma_q",
-                  position_controller_.controller_parameters_.gamma_q_,
-                  &position_controller_.controller_parameters_.gamma_q_);
+		GetRosParameter(private_nh_, "alpha_q1/x",
+                  position_controller_.controller_parameters_.alpha_p1_.x(),
+                  &position_controller_.controller_parameters_.alpha_p1_.x());
+
+		GetRosParameter(private_nh_, "alpha_q1/y",
+                  position_controller_.controller_parameters_.alpha_p1_.y(),
+                  &position_controller_.controller_parameters_.alpha_p1_.y());
+
+		GetRosParameter(private_nh_, "alpha_q1/z",
+                  position_controller_.controller_parameters_.alpha_p1_.z(),
+                  &position_controller_.controller_parameters_.alpha_p1_.z());
+
+		GetRosParameter(private_nh_, "hatKp_0/x",
+                  position_controller_.controller_parameters_.hatKp_0_.x(),
+                  &position_controller_.controller_parameters_.hatKp_0_.x());
+
+		GetRosParameter(private_nh_, "hatKp_0/y",
+                  position_controller_.controller_parameters_.hatKp_0_.y(),
+                  &position_controller_.controller_parameters_.hatKp_0_.y());
+
+		GetRosParameter(private_nh_, "hatKp_0/z",
+                  position_controller_.controller_parameters_.hatKp_0_.z(),
+                  &position_controller_.controller_parameters_.hatKp_0_.z());
+
+		GetRosParameter(private_nh_, "hatKp_1/x",
+                  position_controller_.controller_parameters_.hatKp_1_.x(),
+                  &position_controller_.controller_parameters_.hatKp_1_.x());
+
+		GetRosParameter(private_nh_, "hatKp_1/y",
+                  position_controller_.controller_parameters_.hatKp_1_.y(),
+                  &position_controller_.controller_parameters_.hatKp_1_.y());
+
+		GetRosParameter(private_nh_, "hatKp_1/z",
+                  position_controller_.controller_parameters_.hatKp_1_.z(),
+                  &position_controller_.controller_parameters_.hatKp_1_.z());
+
+		GetRosParameter(private_nh_, "hatKq_0/x",
+                  position_controller_.controller_parameters_.hatKq_0_.x(),
+                  &position_controller_.controller_parameters_.hatKq_0_.x());
+
+		GetRosParameter(private_nh_, "hatKq_0/y",
+                  position_controller_.controller_parameters_.hatKq_0_.y(),
+                  &position_controller_.controller_parameters_.hatKq_0_.y());
+
+		GetRosParameter(private_nh_, "hatKq_0/z",
+                  position_controller_.controller_parameters_.hatKq_0_.z(),
+                  &position_controller_.controller_parameters_.hatKq_0_.z());
+
+		GetRosParameter(private_nh_, "hatKq_1/x",
+                  position_controller_.controller_parameters_.hatKq_1_.x(),
+                  &position_controller_.controller_parameters_.hatKq_1_.x());
+
+		GetRosParameter(private_nh_, "hatKq_1/y",
+                  position_controller_.controller_parameters_.hatKq_1_.y(),
+                  &position_controller_.controller_parameters_.hatKq_1_.y());
+
+		GetRosParameter(private_nh_, "hatKq_1/z",
+                  position_controller_.controller_parameters_.hatKq_1_.z(),
+                  &position_controller_.controller_parameters_.hatKq_1_.z());
+
+		GetRosParameter(private_nh_, "gamma_p/x",
+                  position_controller_.controller_parameters_.gamma_p_.x(),
+                  &position_controller_.controller_parameters_.gamma_p_.x());
+
+		GetRosParameter(private_nh_, "gamma_p/y",
+                  position_controller_.controller_parameters_.gamma_p_.y(),
+                  &position_controller_.controller_parameters_.gamma_p_.y());
+
+		GetRosParameter(private_nh_, "gamma_p/z",
+                  position_controller_.controller_parameters_.gamma_p_.z(),
+                  &position_controller_.controller_parameters_.gamma_p_.z());
+
+		GetRosParameter(private_nh_, "gamma_q/x",
+                  position_controller_.controller_parameters_.gamma_q_.x(),
+                  &position_controller_.controller_parameters_.gamma_q_.x());
+
+		GetRosParameter(private_nh_, "gamma_q/y",
+                  position_controller_.controller_parameters_.gamma_q_.y(),
+                  &position_controller_.controller_parameters_.gamma_q_.y());
+
+		GetRosParameter(private_nh_, "gamma_q/z",
+                  position_controller_.controller_parameters_.gamma_q_.z(),
+                  &position_controller_.controller_parameters_.gamma_q_.z());
 
 		GetRosParameter(private_nh_, "var_pi_p",
                   position_controller_.controller_parameters_.var_pi_p_,

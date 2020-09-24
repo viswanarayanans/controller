@@ -28,6 +28,55 @@ ReconfigPidController::ReconfigPidController()
 ReconfigPidController::~ReconfigPidController() {}
 
 void ReconfigPidController::InitializeParameters() {
+
+  normalized_mass = vehicle_parameters_.box_mass_ + 4*vehicle_parameters_.scissors_mass_ +
+                    4*vehicle_parameters_.rotor_unit_mass_ + 4*vehicle_parameters_.rotor_mass_ +
+                    4*vehicle_parameters_.battery_mass_;
+
+  Eigen::Vector3d box_inertia;
+  box_inertia[0] = (vehicle_parameters_.box_mass_ + 4*vehicle_parameters_.scissors_mass_) *
+                    (vehicle_parameters_.box_dim_[1]*vehicle_parameters_.box_dim_[1] +
+                     vehicle_parameters_.box_dim_[2]*vehicle_parameters_.box_dim_[2])/12;
+  box_inertia[1] = (vehicle_parameters_.box_mass_ + 4*vehicle_parameters_.scissors_mass_) *
+                    (vehicle_parameters_.box_dim_[0]*vehicle_parameters_.box_dim_[0] +
+                     vehicle_parameters_.box_dim_[2]*vehicle_parameters_.box_dim_[2])/12;
+  box_inertia[2] = (vehicle_parameters_.box_mass_ + 4*vehicle_parameters_.scissors_mass_) *
+                    (vehicle_parameters_.box_dim_[0]*vehicle_parameters_.box_dim_[0] +
+                     vehicle_parameters_.box_dim_[1]*vehicle_parameters_.box_dim_[1])/12;
+
+  Eigen::Vector3d rotor_inertia;
+  rotor_inertia[0] = (vehicle_parameters_.rotor_mass_) *
+                      (((vehicle_parameters_.box_dim_[0]/2) + vehicle_parameters_.rotor_ext_len_/1.4142136) *
+                        ((vehicle_parameters_.box_dim_[0]/2) + vehicle_parameters_.rotor_ext_len_/1.4142136));
+  rotor_inertia[1] = (vehicle_parameters_.rotor_mass_) *
+                      (((vehicle_parameters_.box_dim_[1]/2) + vehicle_parameters_.rotor_ext_len_/1.4142136) *
+                        ((vehicle_parameters_.box_dim_[1]/2) + vehicle_parameters_.rotor_ext_len_/1.4142136));
+  rotor_inertia[2] = rotor_inertia[0] + rotor_inertia[1];
+
+  Eigen::Vector3d rotor_unit_inertia;
+  rotor_unit_inertia[0] = (vehicle_parameters_.rotor_unit_mass_) *
+                      ((vehicle_parameters_.box_dim_[0]/2) * (vehicle_parameters_.box_dim_[0]/2));
+  rotor_unit_inertia[1] = (vehicle_parameters_.rotor_unit_mass_) *
+                      ((vehicle_parameters_.box_dim_[1]/2) * (vehicle_parameters_.box_dim_[1]/2));
+  rotor_unit_inertia[2] = rotor_unit_inertia[0] + rotor_unit_inertia[1];
+
+  Eigen::Vector3d battery_inertia;
+  battery_inertia[0] = (vehicle_parameters_.battery_mass_) *
+                      (((vehicle_parameters_.box_dim_[0]/2) + vehicle_parameters_.battery_dim_[0]/(2*1.4142136)) *
+                        ((vehicle_parameters_.box_dim_[0]/2) + vehicle_parameters_.battery_dim_[0]/(2*1.4142136)));
+  battery_inertia[1] = (vehicle_parameters_.battery_mass_) *
+                      (((vehicle_parameters_.box_dim_[1]/2) + vehicle_parameters_.battery_dim_[0]/(2*1.4142136)) *
+                        ((vehicle_parameters_.box_dim_[1]/2) + vehicle_parameters_.battery_dim_[0]/(2*1.4142136)));
+  battery_inertia[2] = battery_inertia[0] + battery_inertia[1];
+
+
+  vehicle_parameters_.inertia_(0, 0) = box_inertia[0] + rotor_inertia[0] + rotor_unit_inertia[0] + battery_inertia[0];
+  vehicle_parameters_.inertia_(1, 1) = box_inertia[1] + rotor_inertia[1] + rotor_unit_inertia[1] + battery_inertia[1];
+  vehicle_parameters_.inertia_(2, 2) = box_inertia[2] + rotor_inertia[2] + rotor_unit_inertia[2] + battery_inertia[2];
+
+
+
+
   calculateAllocationMatrix(vehicle_parameters_.rotor_configuration_, &(controller_parameters_.allocation_matrix_));
   // To make the tuning independent of the inertia matrix we divide here.
   normalized_attitude_gain_ = controller_parameters_.attitude_gain_.transpose()
@@ -36,20 +85,11 @@ void ReconfigPidController::InitializeParameters() {
   normalized_angular_rate_gain_ = controller_parameters_.angular_rate_gain_.transpose()
       * vehicle_parameters_.inertia_.inverse();
 
-  //Added by Viswa : To add payload mass with base mass
-  normalized_mass = vehicle_parameters_.mass_ + vehicle_parameters_.payload_mass_;
-
-
-  
+   
 
   Eigen::Matrix4d I;
   I.setIdentity();
   I.block<3, 3>(0, 0) = vehicle_parameters_.inertia_;
-  I(3, 3) = 1;
-
-
-
-  //ROS_INFO("Inertia : %f %f %f", vehicle_parameters_.inertia_(0,0), vehicle_parameters_.inertia_(1,1), vehicle_parameters_.inertia_(2,2));
   
   angular_acc_to_rotor_velocities_.resize(vehicle_parameters_.rotor_configuration_.rotors.size(), 4);
   // Calculate the pseude-inverse A^{ \dagger} and then multiply by the inertia matrix I.
@@ -58,35 +98,50 @@ void ReconfigPidController::InitializeParameters() {
       * (controller_parameters_.allocation_matrix_
       * controller_parameters_.allocation_matrix_.transpose()).inverse() * I;
   
-  // ROS_INFO_STREAM("Gains \n" << normalized_attitude_gain_ << "\n" << normalized_angular_rate_gain_);
-  // ROS_INFO_STREAM("allocation_matrix_\n" << controller_parameters_.allocation_matrix_);
-  // ROS_INFO_STREAM("I \n" << I);
   ROS_INFO_STREAM("angular_acc_to_rotor_velocities_\n" << angular_acc_to_rotor_velocities_);
-  // ROS_INFO_STREAM("\n"<< (controller_parameters_.allocation_matrix_
-  //     * controller_parameters_.allocation_matrix_.transpose()));
-  // ROS_INFO_STREAM("\n"<< controller_parameters_.allocation_matrix_.transpose()
-  //     * (controller_parameters_.allocation_matrix_
-  //     * controller_parameters_.allocation_matrix_.transpose()).inverse());
-
+  
   initialized_params_ = true;
 }
 
 void ReconfigPidController::ResetParameters(double box_mass, Eigen::Vector3d* box_dim) {
+  normalized_mass = box_mass + 4*vehicle_parameters_.scissors_mass_ +
+                    4*vehicle_parameters_.rotor_unit_mass_ + 4*vehicle_parameters_.rotor_mass_ +
+                    4*vehicle_parameters_.battery_mass_;
+  
   Eigen::Vector3d dim = *box_dim;
 
   Eigen::Vector3d box_inertia;
-  box_inertia[0] = box_mass*(dim[1]*dim[1] + dim[2]*dim[2])/12;
-  box_inertia[1] = box_mass*(dim[0]*dim[0] + dim[2]*dim[2])/12;
-  box_inertia[2] = box_mass*(dim[0]*dim[0] + dim[1]*dim[1])/12;
+  box_inertia[0] = (box_mass + 4*vehicle_parameters_.scissors_mass_)*(dim[1]*dim[1] + dim[2]*dim[2])/12;
+  box_inertia[1] = (box_mass + 4*vehicle_parameters_.scissors_mass_)*(dim[0]*dim[0] + dim[2]*dim[2])/12;
+  box_inertia[2] = (box_mass + 4*vehicle_parameters_.scissors_mass_)*(dim[0]*dim[0] + dim[1]*dim[1])/12;
 
   Eigen::Vector3d rotor_inertia;
-  rotor_inertia[0] = 0.08*(((dim[0]/2)+14.142136)*((dim[0]/2)+14.142136));
-  rotor_inertia[1] = 0.08*(((dim[1]/2)+14.142136)*((dim[1]/2)+14.142136));
+  rotor_inertia[0] = (vehicle_parameters_.rotor_mass_)*
+                      (((dim[0]/2) + vehicle_parameters_.rotor_ext_len_/1.4142136) *
+                        ((dim[0]/2) + vehicle_parameters_.rotor_ext_len_/1.4142136));
+  rotor_inertia[1] = (vehicle_parameters_.rotor_mass_) *
+                      (((dim[1]/2) + vehicle_parameters_.rotor_ext_len_/1.4142136) *
+                        ((dim[1]/2) + vehicle_parameters_.rotor_ext_len_/1.4142136));
   rotor_inertia[2] = rotor_inertia[0] + rotor_inertia[1];
 
-  vehicle_parameters_.inertia_(0, 0) = box_inertia[0] + rotor_inertia[0];
-  vehicle_parameters_.inertia_(1, 1) = box_inertia[1] + rotor_inertia[1];
-  vehicle_parameters_.inertia_(2, 2) = box_inertia[2] + rotor_inertia[2];
+  Eigen::Vector3d rotor_unit_inertia;
+  rotor_unit_inertia[0] = (vehicle_parameters_.rotor_unit_mass_)*((dim[0]/2) * (dim[0]/2));
+  rotor_unit_inertia[1] = (vehicle_parameters_.rotor_unit_mass_)*((dim[1]/2) * (dim[1]/2));
+  rotor_unit_inertia[2] = rotor_unit_inertia[0] + rotor_unit_inertia[1];
+
+  Eigen::Vector3d battery_inertia;
+  battery_inertia[0] = (vehicle_parameters_.battery_mass_) *
+                      (((dim[0]/2) + vehicle_parameters_.battery_dim_[0]/(2*1.4142136)) *
+                        ((dim[0]/2) + vehicle_parameters_.battery_dim_[0]/(2*1.4142136)));
+  battery_inertia[1] = (vehicle_parameters_.battery_mass_) *
+                      (((dim[1]/2) + vehicle_parameters_.battery_dim_[0]/(2*1.4142136)) *
+                        ((dim[1]/2) + vehicle_parameters_.battery_dim_[0]/(2*1.4142136)));
+  battery_inertia[2] = battery_inertia[0] + battery_inertia[1];
+
+
+  vehicle_parameters_.inertia_(0, 0) = box_inertia[0] + rotor_inertia[0] + rotor_unit_inertia[0] + battery_inertia[0];
+  vehicle_parameters_.inertia_(1, 1) = box_inertia[1] + rotor_inertia[1] + rotor_unit_inertia[1] + battery_inertia[1];
+  vehicle_parameters_.inertia_(2, 2) = box_inertia[2] + rotor_inertia[2] + rotor_unit_inertia[2] + battery_inertia[2];
 
 
   // To make the tuning independent of the inertia matrix we divide here.
@@ -95,11 +150,6 @@ void ReconfigPidController::ResetParameters(double box_mass, Eigen::Vector3d* bo
   // To make the tuning independent of the inertia matrix we divide here.
   normalized_angular_rate_gain_ = controller_parameters_.angular_rate_gain_.transpose()
       * vehicle_parameters_.inertia_.inverse();
-
-  //Added by Viswa : To add payload mass with base mass
-  normalized_mass = vehicle_parameters_.mass_ + vehicle_parameters_.payload_mass_;
-
-
   
 
   Eigen::Matrix4d I;
@@ -108,9 +158,6 @@ void ReconfigPidController::ResetParameters(double box_mass, Eigen::Vector3d* bo
   I(3, 3) = 1;
 
 
-
-  //ROS_INFO("Inertia : %f %f %f", vehicle_parameters_.inertia_(0,0), vehicle_parameters_.inertia_(1,1), vehicle_parameters_.inertia_(2,2));
-  
   angular_acc_to_rotor_velocities_.resize(vehicle_parameters_.rotor_configuration_.rotors.size(), 4);
   // Calculate the pseude-inverse A^{ \dagger} and then multiply by the inertia matrix I.
   // A^{ \dagger} = A^T*(A*A^T)^{-1}
@@ -118,15 +165,7 @@ void ReconfigPidController::ResetParameters(double box_mass, Eigen::Vector3d* bo
       * (controller_parameters_.allocation_matrix_
       * controller_parameters_.allocation_matrix_.transpose()).inverse() * I;
   
-  // ROS_INFO_STREAM("Gains \n" << normalized_attitude_gain_ << "\n" << normalized_angular_rate_gain_);
-  // ROS_INFO_STREAM("allocation_matrix_\n" << controller_parameters_.allocation_matrix_);
-  // ROS_INFO_STREAM("I \n" << I);
   ROS_INFO_STREAM("angular_acc_to_rotor_velocities_\n" << angular_acc_to_rotor_velocities_);
-  // ROS_INFO_STREAM("\n"<< (controller_parameters_.allocation_matrix_
-  //     * controller_parameters_.allocation_matrix_.transpose()));
-  // ROS_INFO_STREAM("\n"<< controller_parameters_.allocation_matrix_.transpose()
-  //     * (controller_parameters_.allocation_matrix_
-  //     * controller_parameters_.allocation_matrix_.transpose()).inverse());
 }
 
 void ReconfigPidController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities, 
@@ -170,59 +209,7 @@ void ReconfigPidController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velo
   *rotor_velocities = angular_acc_to_rotor_velocities_ * angular_acceleration_thrust;
   *rotor_velocities = rotor_velocities->cwiseMax(Eigen::VectorXd::Zero(rotor_velocities->rows()));
   *rotor_velocities = rotor_velocities->cwiseSqrt();
-/*
-  Eigen::Matrix4d I;
-  I.setZero();
-  I.block<3, 3>(0, 0) = vehicle_parameters_.inertia_;
-  I(3, 3) = 1;
-  static bool control_flag=0;
-
-  if((odometry_.velocity.z() > 0.01) || (odometry_.velocity.z() < -0.01))
-  {
-    control_flag = 0;
-    //ROS_INFO("Control Flag is ON, %f", acceleration.z());
-
-  }
-
- 
-  if((odometry_.velocity.z() < 0.0001) && control_flag && (odometry_.velocity.z() > -0.0001))
-  {
-    if ((position_error < -0.1))
-    {
-      double payload_mass = - (controller_parameters_.position_gain_.z() * (position_error))/vehicle_parameters_.gravity_;
-      normalized_mass = vehicle_parameters_.mass_ + payload_mass;
-      //UpdateMassAndInertia(new_mass);      
-      ROS_INFO("%f Normalized Mass: %f", odometry_.position.z(), payload_mass);
-      control_flag = 0;
-      ROS_INFO("%f, %f", acceleration.z(), odometry_.velocity.z());
-    }
-      integral_active_ = 1;
-      //ROS_INFO("Integral gain active");
-  }
-  
-  //ROS_INFO("Feeding Calculated motor speeds");
-
-  
-  /*double test_mass = ((I.inverse() *
-                  angular_acc_to_rotor_velocities_ * (*rotor_velocities))[3] +
-                  controller_parameters_.position_gain_.z() * position_error +
-                  controller_parameters_.velocity_gain_.z() *
-                  velocity_W)/vehicle_parameters_.gravity_; //Added by Viswa
-  
-*/
-  /*
-  double test_mass = (thrust + controller_parameters_.position_gain_.z() *
-                  position_error + controller_parameters_.velocity_gain_.z() *
-                  velocity_W)/vehicle_parameters_.gravity_ ; //Added by Viswa
-  */
-  /*ROS_INFO("Tested mass is: %f", test_mass); //Added by Viswa*/
 }
-
-/*void ReconfigPidController::UpdateMassAndInertia(double new_mass) 
-{
-  vehicle_parameters_.payload_mass_ = new_mass;
-  normalized_mass = vehicle_parameters_.mass_ + vehicle_parameters_.payload_mass_;
-}*/
 
 void ReconfigPidController::SetOdometry(const EigenOdometry& odometry) {
   odometry_ = odometry;

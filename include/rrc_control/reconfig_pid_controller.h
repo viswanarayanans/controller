@@ -40,6 +40,21 @@ static const Eigen::Vector3d kDefaultPositionIntegralGain = Eigen::Vector3d(0.00
 static const Eigen::Vector3d kDefaultAttitudeGain = Eigen::Vector3d(3, 3, 0.035);
 static const Eigen::Vector3d kDefaultAngularRateGain = Eigen::Vector3d(0.52, 0.52, 0.025);
 
+// Default values for vehicle parameters
+static const double kDefaultScissorsMass = 0.075;
+static const double kDefaultBoxMass = 0.0;
+static const double kDefaultRotorMass = 0.04;
+static const double kDefaultRotorUnitMass = 0.3;
+static const double kDefaultBatteryMass = 0.16;
+static const double kDefaultRotorExtLength = 0.215;
+static const double kDefaultInertiaX = 0.0347563;
+static const double kDefaultInertiaY = 0.0458929;
+static const double kDefaultInertiaZ = 0.0977;
+
+static const Eigen::Vector3d kDefaultBoxDim = Eigen::Vector3d(0.2, 0.2, 0.1);
+static const Eigen::Vector3d kDefaultBatteryDim = Eigen::Vector3d(0.1, 0.03, 0.03);
+
+
 class ReconfigPidControllerParameters {
  public:
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
@@ -61,6 +76,38 @@ class ReconfigPidControllerParameters {
   RotorConfiguration rotor_configuration_;
 };
 
+
+class ReconfigVehicleParameters {
+ public:
+  EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+  ReconfigVehicleParameters()
+      : scissors_mass_(kDefaultScissorsMass),
+        box_mass_(kDefaultBoxMass),
+        rotor_mass_(kDefaultRotorMass),
+        rotor_unit_mass_(kDefaultRotorUnitMass),
+        battery_mass_(kDefaultBatteryMass),
+        rotor_ext_len_(kDefaultRotorExtLength),
+        gravity_(9.81),
+
+        box_dim_(kDefaultBoxDim),
+        battery_dim_(kDefaultBatteryDim),
+
+        inertia_(Eigen::Vector3d(kDefaultInertiaX, kDefaultInertiaY,
+                                 kDefaultInertiaZ).asDiagonal()) {}
+  double scissors_mass_;
+  double box_mass_;
+  double rotor_mass_;
+  double rotor_unit_mass_;
+  double battery_mass_;
+  double rotor_ext_len_;
+  const double gravity_;
+
+  Eigen::Vector3d box_dim_;
+  Eigen::Vector3d battery_dim_;
+  Eigen::Matrix3d inertia_;
+  RotorConfiguration rotor_configuration_;
+};
+
 class ReconfigPidController {
  public:
   ReconfigPidController();
@@ -75,7 +122,7 @@ class ReconfigPidController {
     const mav_msgs::EigenTrajectoryPoint& command_trajectory);
 
   ReconfigPidControllerParameters controller_parameters_;
-  VehicleParameters vehicle_parameters_;
+  ReconfigVehicleParameters vehicle_parameters_;
 
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
   mutable double normalized_mass; //Added by Viswa

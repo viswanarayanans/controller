@@ -207,9 +207,9 @@
 # Set 4 sq_norm = abs(sq)
 # Stable
 # Weight set to 2 kg length set to 24 cm
-theta_p: {x: 1.2, y: 1.2, z: 0.8}
+theta_p: {x: 1.2, y: 1.2, z: 1.2}
 lam_p: {x: 2.4, y: 2.4, z: 16}
-alpha_p: {x: 3, y: 3, z: 3}
+alpha_p: {x: 4, y: 4, z: 4}
 hatKp: {x: 0.001, y: 0.001, z: 0.001}
 
 

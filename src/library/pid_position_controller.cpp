@@ -48,8 +48,6 @@ void PidPositionController::InitializeParameters() {
   I(3, 3) = 1;
 
 
-
-  //ROS_INFO("Inertia : %f %f %f", vehicle_parameters_.inertia_(0,0), vehicle_parameters_.inertia_(1,1), vehicle_parameters_.inertia_(2,2));
   
   angular_acc_to_rotor_velocities_.resize(vehicle_parameters_.rotor_configuration_.rotors.size(), 4);
   // Calculate the pseude-inverse A^{ \dagger} and then multiply by the inertia matrix I.
@@ -57,16 +55,8 @@ void PidPositionController::InitializeParameters() {
   angular_acc_to_rotor_velocities_ = controller_parameters_.allocation_matrix_.transpose()
       * (controller_parameters_.allocation_matrix_
       * controller_parameters_.allocation_matrix_.transpose()).inverse() * I;
-  
-  // ROS_INFO_STREAM("Gains \n" << normalized_attitude_gain_ << "\n" << normalized_angular_rate_gain_);
-  // ROS_INFO_STREAM("allocation_matrix_\n" << controller_parameters_.allocation_matrix_);
-  // ROS_INFO_STREAM("I \n" << I);
+
   ROS_INFO_STREAM("angular_acc_to_rotor_velocities_\n" << angular_acc_to_rotor_velocities_);
-  // ROS_INFO_STREAM("\n"<< (controller_parameters_.allocation_matrix_
-  //     * controller_parameters_.allocation_matrix_.transpose()));
-  // ROS_INFO_STREAM("\n"<< controller_parameters_.allocation_matrix_.transpose()
-  //     * (controller_parameters_.allocation_matrix_
-  //     * controller_parameters_.allocation_matrix_.transpose()).inverse());
 
   initialized_params_ = true;
 }
@@ -77,7 +67,6 @@ void PidPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velo
   assert(initialized_params_);
 
   rotor_velocities->resize(vehicle_parameters_.rotor_configuration_.rotors.size());
-  // ROS_INFO_STREAM("Rotor velocities calculated: " << rotor_velocities->size());
   
   // Return 0 velocities on all rotors, until the first command is received.
   if (!controller_active_) {
@@ -112,59 +101,7 @@ void PidPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velo
   *rotor_velocities = angular_acc_to_rotor_velocities_ * angular_acceleration_thrust;
   *rotor_velocities = rotor_velocities->cwiseMax(Eigen::VectorXd::Zero(rotor_velocities->rows()));
   *rotor_velocities = rotor_velocities->cwiseSqrt();
-/*
-  Eigen::Matrix4d I;
-  I.setZero();
-  I.block<3, 3>(0, 0) = vehicle_parameters_.inertia_;
-  I(3, 3) = 1;
-  static bool control_flag=0;
-
-  if((odometry_.velocity.z() > 0.01) || (odometry_.velocity.z() < -0.01))
-  {
-    control_flag = 0;
-    //ROS_INFO("Control Flag is ON, %f", acceleration.z());
-
-  }
-
- 
-  if((odometry_.velocity.z() < 0.0001) && control_flag && (odometry_.velocity.z() > -0.0001))
-  {
-    if ((position_error < -0.1))
-    {
-      double payload_mass = - (controller_parameters_.position_gain_.z() * (position_error))/vehicle_parameters_.gravity_;
-      normalized_mass = vehicle_parameters_.mass_ + payload_mass;
-      //UpdateMassAndInertia(new_mass);      
-      ROS_INFO("%f Normalized Mass: %f", odometry_.position.z(), payload_mass);
-      control_flag = 0;
-      ROS_INFO("%f, %f", acceleration.z(), odometry_.velocity.z());
-    }
-      integral_active_ = 1;
-      //ROS_INFO("Integral gain active");
-  }
-  
-  //ROS_INFO("Feeding Calculated motor speeds");
-
-  
-  /*double test_mass = ((I.inverse() *
-                  angular_acc_to_rotor_velocities_ * (*rotor_velocities))[3] +
-                  controller_parameters_.position_gain_.z() * position_error +
-                  controller_parameters_.velocity_gain_.z() *
-                  velocity_W)/vehicle_parameters_.gravity_; //Added by Viswa
-  
-*/
-  /*
-  double test_mass = (thrust + controller_parameters_.position_gain_.z() *
-                  position_error + controller_parameters_.velocity_gain_.z() *
-                  velocity_W)/vehicle_parameters_.gravity_ ; //Added by Viswa
-  */
-  /*ROS_INFO("Tested mass is: %f", test_mass); //Added by Viswa*/
 }
-
-/*void PidPositionController::UpdateMassAndInertia(double new_mass) 
-{
-  vehicle_parameters_.payload_mass_ = new_mass;
-  normalized_mass = vehicle_parameters_.mass_ + vehicle_parameters_.payload_mass_;
-}*/
 
 void PidPositionController::SetOdometry(const EigenOdometry& odometry) {
   odometry_ = odometry;

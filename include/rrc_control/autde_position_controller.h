@@ -34,38 +34,38 @@ namespace rrc_control {
 		AuTdePositionControllerParameters()
 			: theta_p_(kDefaultTheta_p),
 			  theta_q_(kDefaultTheta_q),
-			  alpha_p0_(kDefaultAlpha),
-			  alpha_p1_(kDefaultAlpha),
-			  alpha_q0_(kDefaultAlpha),
-			  alpha_q1_(kDefaultAlpha),
+			  alpha_p0_(kDefaultAlpha, kDefaultAlpha, kDefaultAlpha),
+			  alpha_p1_(kDefaultAlpha, kDefaultAlpha, kDefaultAlpha),
+			  alpha_q0_(kDefaultAlpha, kDefaultAlpha, kDefaultAlpha),
+			  alpha_q1_(kDefaultAlpha, kDefaultAlpha, kDefaultAlpha),
 			  Kpp_(kDefaultKp),
 			  Kdp_(kDefaultKd),
 			  Kpq_(kDefaultKp),
 			  Kdq_(kDefaultKd),
-			  hatKp_0_(kDefaultHatKp),
-			  hatKp_1_(kDefaultHatKp),
-			  hatKq_0_(kDefaultHatKq),
-			  hatKq_1_(kDefaultHatKq),
+			  hatKp_0_(kDefaultHatKp, kDefaultHatKp, kDefaultHatKp),
+			  hatKp_1_(kDefaultHatKp, kDefaultHatKp, kDefaultHatKp),
+			  hatKq_0_(kDefaultHatKq, kDefaultHatKq, kDefaultHatKq),
+			  hatKq_1_(kDefaultHatKq, kDefaultHatKq, kDefaultHatKq),
 			  alpha_m_(kDefaultAlphaM),
 			  hatM_(kDefaultHatM),
-			  gamma_p_(kDefaultGamma),
-			  gamma_q_(kDefaultGamma),
+			  gamma_p_(kDefaultGamma, kDefaultGamma, kDefaultGamma),
+			  gamma_q_(kDefaultGamma, kDefaultGamma, kDefaultGamma),
 			  var_pi_p_(kDefaultVarPi),
 			  var_pi_q_(kDefaultVarPi) {
 			  	calculateAllocationMatrix(rotor_configuration_, &allocation_matrix_);
 			  }
 
 		Eigen::Matrix4Xd allocation_matrix_;
-		double alpha_p0_;
-		double alpha_p1_;
-		double alpha_q0_;
-		double alpha_q1_;
-		double hatKp_0_;
-		double hatKp_1_;
-		double hatKq_0_;
-		double hatKq_1_;
-		double gamma_p_;
-		double gamma_q_;
+		Eigen::Vector3d alpha_p0_;
+		Eigen::Vector3d alpha_p1_;
+		Eigen::Vector3d alpha_q0_;
+		Eigen::Vector3d alpha_q1_;
+		Eigen::Vector3d hatKp_0_;
+		Eigen::Vector3d hatKp_1_;
+		Eigen::Vector3d hatKq_0_;
+		Eigen::Vector3d hatKq_1_;
+		Eigen::Vector3d gamma_p_;
+		Eigen::Vector3d gamma_q_;
 
 		Eigen::Vector3d Kpp_;
 		Eigen::Vector3d Kpq_;

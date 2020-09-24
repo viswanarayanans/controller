@@ -1,0 +1,35 @@
+K1p: {x: 0.6, y: 0.6, z: 0.6}
+K2p: {x: 4.2, y: 4.2, z: 4.2}
+kbp: {x: 0.3, y: 0.3, z: 0.3}
+
+K1q: {x: 10, y: 10, z: 0.6}
+K2q: {x: 18, y: 18, z: 10}
+kbq: {x: 0.7 , y: 0.7, z: 0.35}
+
+sigma_p: {x: 1.1, y: 1.1, z: 1.1}
+sigma_q: {x: 1.1, y: 1.1, z: 1.1}
+
+E_hat_p: {x: 0.1, y: 0.1, z: 0.1}
+E_hat_q: {x: 0.1, y: 0.1, z: 0.1}
+
+c1_p: {x: 0.1, y: 0.1, z: 0.1}
+c1_q: {x: 0.1, y: 0.1, z: 0.1}
+c2_p: {x: 1, y: 1, z: 1}
+c2_q: {x: 1, y: 1, z: 1}
+
+eeta_p: {x: 0.1, y: 0.1, z: 0.1}
+eeta_q: {x: 1, y: 1, z: 1}
+attitude_gain: {x: 1, y: 1, z: 0.035}
+angular_rate_gain: {x: 0.22, y: 0.22, z: 0.01}
+
+
+# Working set: combined
+# K1p: {x: 0.6, y: 0.6, z: 0.6}
+# K2p: {x: 4.2, y: 4.2, z: 4.2}
+# kbp: {x: 0.3, y: 0.3, z: 0.3}
+
+# K1q: {x: 6, y: 6, z: 0.6}
+# K2q: {x: 18, y: 18, z: 10}
+# kbq: {x: 0.5 , y: 0.5, z: 0.5}
+# attitude_gain: {x: 1, y: 1, z: 0.035}
+# angular_rate_gain: {x: 0.22, y: 0.22, z: 0.01}

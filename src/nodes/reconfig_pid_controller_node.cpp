@@ -114,7 +114,47 @@ void ReconfigPidControllerNode::InitializeParams() {
                   reconfig_pid_controller_.controller_parameters_.angular_rate_gain_.z(),
                   &reconfig_pid_controller_.controller_parameters_.angular_rate_gain_.z());
   ROS_INFO_STREAM("Rotor size:" << reconfig_pid_controller_.vehicle_parameters_.rotor_configuration_.rotors.size());
-  GetVehicleParameters(private_nh_, &reconfig_pid_controller_.vehicle_parameters_);
+  
+  GetRosParameter(private_nh_, "scissors_mass",
+                  reconfig_pid_controller_.vehicle_parameters_.scissors_mass_,
+                  &reconfig_pid_controller_.vehicle_parameters_.scissors_mass_);
+  GetRosParameter(private_nh_, "box_mass",
+                  reconfig_pid_controller_.vehicle_parameters_.box_mass_,
+                  &reconfig_pid_controller_.vehicle_parameters_.box_mass_);
+  GetRosParameter(private_nh_, "rotor_mass",
+                  reconfig_pid_controller_.vehicle_parameters_.rotor_mass_,
+                  &reconfig_pid_controller_.vehicle_parameters_.rotor_mass_);
+  GetRosParameter(private_nh_, "rotor_unit_mass",
+                  reconfig_pid_controller_.vehicle_parameters_.rotor_unit_mass_,
+                  &reconfig_pid_controller_.vehicle_parameters_.rotor_unit_mass_);
+  GetRosParameter(private_nh_, "battery_mass",
+                  reconfig_pid_controller_.vehicle_parameters_.battery_mass_,
+                  &reconfig_pid_controller_.vehicle_parameters_.battery_mass_);
+  GetRosParameter(private_nh_, "rotor_ext_len",
+                  reconfig_pid_controller_.vehicle_parameters_.rotor_ext_len_,
+                  &reconfig_pid_controller_.vehicle_parameters_.rotor_ext_len_);
+  GetRosParameter(private_nh_, "box_dim/x",
+                  reconfig_pid_controller_.vehicle_parameters_.box_dim_.x(),
+                  &reconfig_pid_controller_.vehicle_parameters_.box_dim_.x());
+  GetRosParameter(private_nh_, "box_dim/y",
+                  reconfig_pid_controller_.vehicle_parameters_.box_dim_.y(),
+                  &reconfig_pid_controller_.vehicle_parameters_.box_dim_.y());
+  GetRosParameter(private_nh_, "box_dim/z",
+                  reconfig_pid_controller_.vehicle_parameters_.box_dim_.z(),
+                  &reconfig_pid_controller_.vehicle_parameters_.box_dim_.z());
+  GetRosParameter(private_nh_, "battery_dim/x",
+                  reconfig_pid_controller_.vehicle_parameters_.battery_dim_.x(),
+                  &reconfig_pid_controller_.vehicle_parameters_.battery_dim_.x());
+  GetRosParameter(private_nh_, "battery_dim/y",
+                  reconfig_pid_controller_.vehicle_parameters_.battery_dim_.y(),
+                  &reconfig_pid_controller_.vehicle_parameters_.battery_dim_.y());
+  GetRosParameter(private_nh_, "battery_dim/z",
+                  reconfig_pid_controller_.vehicle_parameters_.battery_dim_.z(),
+                  &reconfig_pid_controller_.vehicle_parameters_.battery_dim_.z());
+
+  GetRotorConfiguration(private_nh_, &reconfig_pid_controller_.vehicle_parameters_.rotor_configuration_);
+
+
   ROS_INFO_STREAM("Rotor size:" << reconfig_pid_controller_.vehicle_parameters_.rotor_configuration_.rotors.size());
 
   reconfig_pid_controller_.InitializeParameters();

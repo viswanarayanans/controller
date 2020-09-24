@@ -77,9 +77,9 @@ void AuTdePositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_ve
   static Eigen::Vector3d thrust_3d(0,0,0);
   CalculateThrust(&thrust_3d, data_out);
   // ROS_INFO_STREAM("Thrust done"<<thrust_3d);
-  if(thrust_3d[2]<-1){
-    thrust_3d[2] = -1;
-  }
+  // if(thrust_3d[2]<-1){
+  //   thrust_3d[2] = -1;
+  // }
 
   double thrust = thrust_3d.dot(odometry_.orientation.toRotationMatrix().col(2)); //Added by Viswa
   ROS_INFO_STREAM("Thrust:"<<thrust);
@@ -140,54 +140,63 @@ void AuTdePositionController::CalculateThrust(Eigen::Vector3d* thrust,
 
   static Eigen::Vector3d previous_velocity(0,0,0);
   
-  Eigen::VectorXd xp(6);
-  xp << position_error, velocity_error;
 
   Eigen::Vector3d sp;
   sp = velocity_error + controller_parameters_.theta_p_.cwiseProduct(position_error);
 
-  static double hatKp_0 = controller_parameters_.hatKp_0_;
-  static double hatKp_1 = controller_parameters_.hatKp_1_;
+  static Eigen::Vector3d hatKp_0 = controller_parameters_.hatKp_0_;
+  static Eigen::Vector3d hatKp_1 = controller_parameters_.hatKp_1_;
   static double hatM = controller_parameters_.hatM_;
-  static double gamma_p = controller_parameters_.gamma_p_;
-
-  double dot_hatKp_0, dot_hatKp_1;
-  double dot_hatM;
-  double dot_gamma_p;
-
-
-  dot_hatKp_0 = sp.norm() - controller_parameters_.alpha_p0_*hatKp_0;
-  dot_hatKp_1 = sp.norm()*xp.norm() - controller_parameters_.alpha_p1_*hatKp_1;
-  dot_gamma_p = -(1 + pow(xp.norm(),4)) + 0.001;
-  dot_hatM = -vehicle_parameters_.gravity_*sp[2] - controller_parameters_.alpha_m_*(hatM);
+  static Eigen::Vector3d gamma_p = controller_parameters_.gamma_p_;
 
 
   current_time = ros::Time::now();
   double dt = (current_time - last_time).toSec();
+  dt = 0.01;
 
   if(dt>0 && dt<1){
   
-    hatKp_0 += dot_hatKp_0*dt;
-    hatKp_1 += dot_hatKp_1*dt;
-    hatM += dot_hatM*dt;
-    ROS_INFO_STREAM("Mass:"<<hatM);
-    gamma_p += dot_gamma_p*dt;
-
-
-    // double rho_p = hatKp_0 + hatKp_1*xp.norm() + gamma_p;
-    double rho_p = hatKp_0 + hatKp_1*xp.norm();
+    Eigen::Vector3d dot_hatKp_0, dot_hatKp_1;
+    double dot_hatM;
+    Eigen::Vector3d dot_gamma_p;
 
     Eigen::Vector3d sgp;
     sgp << Sigmoid(sp[0], controller_parameters_.var_pi_p_), Sigmoid(sp[1], controller_parameters_.var_pi_p_), Sigmoid(sp[2], controller_parameters_.var_pi_p_);
 
+    Eigen::VectorXd xpx(2), xpy(2), xpz(2);
+    xpx << position_error[0], velocity_error[0];
+    xpy << position_error[1], velocity_error[1];
+    xpz << position_error[2], velocity_error[2];
+    
+    Eigen::Vector3d xp(0,0,0);
+    // xp << position_error, velocity_error;
+    // xp << xpx.norm(), xpy.norm(), xpz.norm();
+
+    dot_hatKp_0 = sp.cwiseAbs() - controller_parameters_.alpha_p0_.cwiseProduct(hatKp_0);
+    dot_hatKp_1 = sp.cwiseAbs().cwiseProduct(xp.cwiseAbs()) - controller_parameters_.alpha_p1_.cwiseProduct(hatKp_1);
+    dot_gamma_p = -(1 + xp.array().pow(4)) + 0.001;
+    dot_hatM = -vehicle_parameters_.gravity_*sp[2] - controller_parameters_.alpha_m_*(hatM);
+
+    hatKp_0 += dot_hatKp_0*dt;
+    hatKp_1 += dot_hatKp_1*dt;
+    hatM += dot_hatM*dt;
+    // ROS_INFO_STREAM("Mass:"<<hatM);
+    gamma_p += dot_gamma_p*dt;
+
+
+    Eigen::Vector3d rho_p = hatKp_0 + hatKp_1.cwiseProduct(xp) + gamma_p;
+    // Eigen::Vector3d rho_p = hatKp_0 + hatKp_1.cwiseProduct(xp);
+
+
     Eigen::Vector3d v_p = command_trajectory_.acceleration_W - controller_parameters_.Kpp_.cwiseProduct(position_error)
-          + controller_parameters_.Kdp_.cwiseProduct(velocity_error) - rho_p*sgp + hatM*vehicle_parameters_.gravity_*e_3;
-    ROS_INFO_STREAM("Vp: "<<v_p);  
+                        + controller_parameters_.Kdp_.cwiseProduct(velocity_error) - rho_p.cwiseProduct(sgp) 
+                        + hatM*vehicle_parameters_.gravity_*e_3;
+    // ROS_INFO_STREAM("Vp: "<<v_p);  
 
     Eigen::Vector3d accel = (odometry_.velocity - previous_velocity)/dt;
-    ROS_INFO_STREAM("Position:"<<odometry_.position[2]);
-    ROS_INFO_STREAM("Accel:"<<accel);
-    ROS_INFO_STREAM("Dt:"<<dt);
+    // ROS_INFO_STREAM("Position:"<<odometry_.position[2]);
+    // ROS_INFO_STREAM("Accel:"<<accel);
+    // ROS_INFO_STREAM("Dt:"<<dt);
 
     // ROS_INFO_STREAM("Up thrust:"<<*thrust);
 
@@ -264,27 +273,37 @@ void AuTdePositionController::CalculateMoments(Eigen::Vector3d force,
 	  Eigen::Vector3d sq;
 	  sq = angular_rate_error + controller_parameters_.theta_q_.cwiseProduct(angle_error);
 
-    static double hatKq_0 = controller_parameters_.hatKq_0_;
-    static double hatKq_1 = controller_parameters_.hatKq_1_;
-    static double gamma_q = controller_parameters_.gamma_q_;
+    static Eigen::Vector3d hatKq_0 = controller_parameters_.hatKq_0_;
+    static Eigen::Vector3d hatKq_1 = controller_parameters_.hatKq_1_;
+    static Eigen::Vector3d gamma_q = controller_parameters_.gamma_q_;
 
-    double dot_hatKq_0, dot_hatKq_1;
-    double dot_gamma_q;
-
-    Eigen::VectorXd xq(6);
-    xq << angle_error, angular_rate_error;
-
-    dot_hatKq_0 = sq.norm() - controller_parameters_.alpha_q0_*hatKq_0;
-    dot_hatKq_1 = sq.norm()*xq.norm() - controller_parameters_.alpha_q1_*hatKq_1;
-    dot_gamma_q = -(1 + pow(xq.norm(),4)) + 0.001;
-	  
 
 	  // ROS_INFO_STREAM("XQ_NORM" << xq_norm);
 
 	  current_time = ros::Time::now();
 	  double dt = (current_time - last_time).toSec();
+    dt = 0.01;
     
     if (dt>0 && dt<1){
+      Eigen::Vector3d dot_hatKq_0, dot_hatKq_1;
+      Eigen::Vector3d dot_gamma_q;
+
+      // Eigen::VectorXd xq(6);
+      // xq << angle_error, angular_rate_error;
+
+
+      Eigen::VectorXd xqx(2), xqy(2), xqz(2);
+      xqx << angle_error[0], angular_rate_error[0];
+      xqy << angle_error[1], angular_rate_error[1];
+      xqz << angle_error[2], angular_rate_error[2];
+
+      Eigen::Vector3d xq;
+      xq << xqx.norm(), xqy.norm(), xqz.norm();
+
+      dot_hatKq_0 = sq.cwiseAbs() - controller_parameters_.alpha_q0_.cwiseProduct(hatKq_0);
+      dot_hatKq_1 = sq.cwiseAbs().cwiseProduct(xq.cwiseAbs()) - controller_parameters_.alpha_q1_.cwiseProduct(hatKq_1);
+      dot_gamma_q = -(1 + xq.array().pow(4)) + 0.001;
+  	  
 
       hatKq_0 += dot_hatKq_0*dt;
       hatKq_1 += dot_hatKq_1*dt;
@@ -292,19 +311,20 @@ void AuTdePositionController::CalculateMoments(Eigen::Vector3d force,
   	  
   	  // ROS_INFO("hatKq done");
 
-  	  // Eigen::Matrix3d lam_q = controller_parameters_.lam_q_.asDiagonal();
-      double rho_q = hatKq_0 + hatKq_1*xq.norm() + gamma_q;
+      Eigen::Vector3d rho_q = hatKq_0 + hatKq_1.cwiseProduct(xq) + gamma_q;
+      // Eigen::Vector3d rho_q = hatKq_0 + hatKq_1.cwiseProduct(xq);
       Eigen::Vector3d sgq;
       sgq << Sigmoid(sq[0], controller_parameters_.var_pi_q_), Sigmoid(sq[1], controller_parameters_.var_pi_q_), Sigmoid(sq[2], controller_parameters_.var_pi_q_);
-      // Eigen::Vector3d v_q = -controller_parameters_.Kpq_.cwiseProduct(angle_error) - controller_parameters_.Kdq_.cwiseProduct(angular_rate_error) - rho_q*sgq;
+      // Eigen::Vector3d v_q = - controller_parameters_.Kpq_.cwiseProduct(angle_error) - controller_parameters_.Kdq_.cwiseProduct(angular_rate_error) 
+      //                       - rho_q.cwiseProduct(sgq);
       Eigen::Vector3d v_q = -controller_parameters_.Kpq_.cwiseProduct(angle_error) - controller_parameters_.Kdq_.cwiseProduct(angular_rate_error) ;
 
-      // *moments = vehicle_parameters_.inertia_* v_q + *moments;
-      *moments = vehicle_parameters_.inertia_* v_q ;
 
       Eigen::Vector3d ang_acc = (odometry_.angular_velocity - previous_ang_velocity)/dt;
-      ROS_INFO_STREAM("Ang Acc:"<<ang_acc);
+      // ROS_INFO_STREAM("Ang Acc:"<<ang_acc);
 
+      // *moments = vehicle_parameters_.inertia_*v_q + *moments;
+      *moments = vehicle_parameters_.inertia_* v_q ;
       // *moments = *moments - vehicle_parameters_.inertia_*ang_acc;
     }
 

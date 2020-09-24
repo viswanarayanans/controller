@@ -109,7 +109,7 @@ void SmcPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velo
 
   double thrust = thrust_3d.dot(odometry_.orientation.toRotationMatrix().col(2)); //Added by Viswa
   data_out->thrust = thrust;
-  ROS_INFO_STREAM(thrust);
+  // ROS_INFO_STREAM(thrust);
 
   Eigen::Vector3d moments;
   CalculateMoments(thrust_3d, &moments, data_out);
