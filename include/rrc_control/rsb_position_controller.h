@@ -119,6 +119,8 @@ class RsbPositionController {
 
   mav_msgs::EigenTrajectoryPoint command_trajectory_;
   EigenOdometry odometry_;
+  Eigen::Vector3d J_inv;
+  Eigen::Vector3d h_tilde;
 
 
   void CalculateMoments(Eigen::Vector3d force, Eigen::Vector3d* moments, msg_check::PlotDataMsg* data_out) const;

@@ -80,20 +80,28 @@ def error_callback(data):
 	ferror.write(str(data.angle_error.y))
 	ferror.write("\nErr_psi:")
 	ferror.write(str(data.angle_error.z))
+	ferror.write("\nThrust:")
+	ferror.write(str(data.thrust))
+	ferror.write("\nMoments_x:")
+	ferror.write(str(data.moments.x))
+	ferror.write("\nMoments_y:")
+	ferror.write(str(data.moments.y))
+	ferror.write("\nMoments_z:")
+	ferror.write(str(data.moments.z))
 
 
 if __name__ == '__main__':
     rospy.init_node('odom_traj',anonymous=True)
     global first_msg, t
     first_msg = 1
-    fodom = open("point_track/odom_smc.txt","w")
-    ferror = open("point_track/error_smc.txt","w")
-    ftraj = open("point_track/traj_smc.txt","w")
+    fodom = open("icra_2021/odom_elas_elong_wall.txt","w")
+    ferror = open("icra_2021/error_elas_elong_wall.txt","w")
+    ftraj = open("icra_2021/traj_elas_elong_wall.txt","w")
     t = time.time()
 
     # Subsciber
-    rospy.Subscriber("/pelican/command/trajectory", MultiDOFJointTrajectory, traj_callback)
-    rospy.Subscriber("/pelican/odometry_sensor1/odometry", Odometry, odom_callback)
+    rospy.Subscriber("/command/trajectory", MultiDOFJointTrajectory, traj_callback)
+    rospy.Subscriber("/elasticopter/odometry_sensor1/odometry", Odometry, odom_callback)
     rospy.Subscriber("/data_out", PlotDataMsg, error_callback)
 
     # Publisher

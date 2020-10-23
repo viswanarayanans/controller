@@ -44,6 +44,7 @@ void RsbPositionController::InitializeParameters() {
 
   //Added by Viswa : To add payload mass with base mass
   normalized_mass = vehicle_parameters_.mass_ + vehicle_parameters_.payload_mass_;
+  J_inv = vehicle_parameters_.inertia_.inverse().diagonal();
 
   initialized_params_ = true;
 }
@@ -125,14 +126,17 @@ void RsbPositionController::CalculateThrust(Eigen::Vector3d* thrust,
   Eigen::Vector3d alpha_p = -sqr_term_p.cwiseProduct(controller_parameters_.K1p_.cwiseProduct(position_error)) + command_trajectory_.velocity_W;
 
   Eigen::Vector3d z2_p = velocity_W - alpha_p;
-  Eigen::Vector3d dot_alpha_p;
+  Eigen::Vector3d dot_alpha_p(0,0,0);
 
 
   // dot_alpha_p = (alpha - previous_alpha)/0.01;
-  dot_alpha_p = 2*position_error.cwiseProduct(velocity_error).cwiseProduct(controller_parameters_.K1p_).cwiseProduct(position_error)
-                - sqr_term_p.cwiseProduct(controller_parameters_.K1p_.cwiseProduct(velocity_error))
-                + command_trajectory_.acceleration_W;
-  // dot_alpha_p<< 0, 0, 0;
+  dot_alpha_p = (3*position_error.cwiseProduct(position_error) 
+                - controller_parameters_.kbp_.cwiseProduct(controller_parameters_.kbp_)).cwiseProduct(
+                  controller_parameters_.K1p_.cwiseProduct(velocity_error)) + command_trajectory_.acceleration_W;
+  // dot_alpha_p = 2*position_error.cwiseProduct(velocity_error).cwiseProduct(controller_parameters_.K1p_).cwiseProduct(position_error)
+  //               - sqr_term_p.cwiseProduct(controller_parameters_.K1p_.cwiseProduct(velocity_error))
+  //               + command_trajectory_.acceleration_W;
+  // // dot_alpha_p<< 0, 0, 0;
 
   Eigen::Vector3d term_3_p(0,0,0);
   term_3_p << position_error[0]/sqr_term_p[0], position_error[1]/sqr_term_p[1], position_error[2]/sqr_term_p[2];
@@ -140,11 +144,11 @@ void RsbPositionController::CalculateThrust(Eigen::Vector3d* thrust,
 
   Eigen::Vector3d sqrt_term_p = (z2_p.cwiseProduct(z2_p) + controller_parameters_.eeta_p_).cwiseSqrt();
 
-  Eigen::Vector3d u0_p = vehicle_parameters_.gravity_ * e_3 + dot_alpha_p 
+  Eigen::Vector3d u0_p = dot_alpha_p 
                         - controller_parameters_.K2p_.cwiseProduct(z2_p) - term_3_p;
 
-  Eigen::Vector3d rho_p_ = controller_parameters_.E_hat_p_.cwiseProduct(u0_p.cwiseAbs()) + controller_parameters_.c2_p_ 
-                          + controller_parameters_.c2_p_.cwiseProduct(xi_p);
+  Eigen::Vector3d rho_p_ = controller_parameters_.E_hat_p_.cwiseProduct(u0_p.cwiseAbs())  
+                          + (controller_parameters_.c1_p_*vehicle_parameters_.gravity_)/vehicle_parameters_.mass_;
 
   Eigen::Vector3d rho_p(0,0,0);
   rho_p << rho_p_[0]/(1 - controller_parameters_.E_hat_p_[0]*controller_parameters_.sigma_p_[0]),
@@ -156,7 +160,7 @@ void RsbPositionController::CalculateThrust(Eigen::Vector3d* thrust,
               -rho_p[1]*controller_parameters_.sigma_p_[1]*(z2_p[1]/sqrt_term_p[1]),
                 -rho_p[2]*controller_parameters_.sigma_p_[2]*(z2_p[2]/sqrt_term_p[2]); 
 
-  *thrust = vehicle_parameters_.mass_*(u0_p + del_u_p);
+  *thrust = vehicle_parameters_.mass_*(vehicle_parameters_.gravity_ * e_3 + u0_p + del_u_p);
 
   last_time = current_time;
   // previous_alpha_p = alpha_p;
@@ -217,8 +221,13 @@ void RsbPositionController::CalculateMoments(Eigen::Vector3d force,
     Eigen::Vector3d alpha_q = -sqr_term_q.cwiseProduct(controller_parameters_.K1q_.cwiseProduct(angle_error)) 
                               + angular_rate_des_B;
 
-    Eigen::Vector3d dot_alpha_q = 2*angle_error.cwiseProduct(angular_rate_error).cwiseProduct(controller_parameters_.K1q_.cwiseProduct(angle_error))
-                                  - sqr_term_q.cwiseProduct(controller_parameters_.K1q_.cwiseProduct(angular_rate_error));
+    Eigen::Vector3d dot_alpha_q(0,0,0);
+    dot_alpha_q = (3*angle_error.cwiseProduct(angle_error) 
+                  - controller_parameters_.kbq_.cwiseProduct(controller_parameters_.kbq_)).cwiseProduct(
+                    controller_parameters_.K1q_.cwiseProduct(angular_rate_error));
+
+    // Eigen::Vector3d dot_alpha_q = 2*angle_error.cwiseProduct(angular_rate_error).cwiseProduct(controller_parameters_.K1q_.cwiseProduct(angle_error))
+    //                               - sqr_term_q.cwiseProduct(controller_parameters_.K1q_.cwiseProduct(angular_rate_error));
 
     Eigen::Vector3d z2_q = odometry_.angular_velocity - alpha_q;
 
@@ -229,8 +238,8 @@ void RsbPositionController::CalculateMoments(Eigen::Vector3d force,
 
     Eigen::Vector3d u0_q = dot_alpha_q - controller_parameters_.K2q_.cwiseProduct(z2_q) - term_3_q;
 
-    Eigen::Vector3d rho_q_ = controller_parameters_.E_hat_q_.cwiseProduct(u0_q.cwiseAbs()) + controller_parameters_.c2_q_ 
-                            + controller_parameters_.c2_q_.cwiseProduct(xi_q);
+    Eigen::Vector3d rho_q_ = controller_parameters_.E_hat_q_.cwiseProduct(u0_q.cwiseAbs()) 
+                             + J_inv.cwiseProduct(controller_parameters_.c1_q_).cwiseProduct(angular_rate_des_B);
 
     Eigen::Vector3d rho_q(0,0,0);
     rho_q << rho_q_[0]/(1 - controller_parameters_.E_hat_q_[0]*controller_parameters_.sigma_q_[0]),

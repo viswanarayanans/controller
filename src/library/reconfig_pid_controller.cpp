@@ -32,6 +32,8 @@ void ReconfigPidController::InitializeParameters() {
   normalized_mass = vehicle_parameters_.box_mass_ + 4*vehicle_parameters_.scissors_mass_ +
                     4*vehicle_parameters_.rotor_unit_mass_ + 4*vehicle_parameters_.rotor_mass_ +
                     4*vehicle_parameters_.battery_mass_;
+  ROS_INFO_STREAM("Mass "<< normalized_mass<<" "<< vehicle_parameters_.box_mass_);
+  // normalized_mass = 3;
 
   Eigen::Vector3d box_inertia;
   box_inertia[0] = (vehicle_parameters_.box_mass_ + 4*vehicle_parameters_.scissors_mass_) *
@@ -73,6 +75,15 @@ void ReconfigPidController::InitializeParameters() {
   vehicle_parameters_.inertia_(0, 0) = box_inertia[0] + rotor_inertia[0] + rotor_unit_inertia[0] + battery_inertia[0];
   vehicle_parameters_.inertia_(1, 1) = box_inertia[1] + rotor_inertia[1] + rotor_unit_inertia[1] + battery_inertia[1];
   vehicle_parameters_.inertia_(2, 2) = box_inertia[2] + rotor_inertia[2] + rotor_unit_inertia[2] + battery_inertia[2];
+  // ROS_INFO_STREAM("Inertia" << vehicle_parameters_.inertia_(0,0)
+  //                           << vehicle_parameters_.inertia_(1,1)
+  //                           << vehicle_parameters_.inertia_(2,2));
+
+
+  // vehicle_parameters_.inertia_(0, 0) = 0.08;
+  // vehicle_parameters_.inertia_(1, 1) = 0.08;
+  // vehicle_parameters_.inertia_(2, 2) = 0.12;
+
 
 
 
@@ -190,6 +201,7 @@ void ReconfigPidController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velo
 
   // Project thrust onto body z axis.
   double thrust = -normalized_mass * acceleration.dot(odometry_.orientation.toRotationMatrix().col(2)); //Added by Viswa
+  ROS_INFO_STREAM(thrust);
 
   data_out->thrust = thrust;
 

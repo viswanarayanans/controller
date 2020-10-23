@@ -1,0 +1,6 @@
+eeta_p: {x: 2, y: 2, z: 4}
+eeta_q: {x: 10, y: 10, z: 3}
+var_pi_p: 0.4
+var_pi_q: 1
+theta_p: {x: 0.8, y: 0.8, z: 3}
+theta_q: {x: 3, y: 3, z: 0.5}

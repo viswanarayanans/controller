@@ -250,7 +250,7 @@ void ASmcPositionController::CalculateMoments(Eigen::Vector3d force,
 				  	rho_q[1]*Sigmoid(sq[1], controller_parameters_.var_pi_q_), 
 				  	rho_q[2]*Sigmoid(sq[2], controller_parameters_.var_pi_q_);
 
-	  ROS_INFO_STREAM(delTau_q);
+	  // ROS_INFO_STREAM(delTau_q);
 
 	  *moments = -controller_parameters_.lam_q_.cwiseProduct(sq) - delTau_q;
 

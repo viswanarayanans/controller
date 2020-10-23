@@ -2,7 +2,7 @@
 m_cap: 2.0
 
 length: 0.3
-side: 0.2
+side: 0.21
 gravity: 9.81
 arm_length: 0.21
 rotor_mass: 0.01
@@ -16,71 +16,21 @@ var_pi_q: 1
 theta_p: {x: 3, y: 3, z: 3}
 theta_q: {x: 3, y: 3, z: 3}
 
-
-# Default
+# # Decent
 # m_cap: 2.0
 
 # length: 0.3
-# side: 0.3
-# arm_length: 0.3
-# gravity: 9.81
-# rotor_mass: 0.08
-# payload: 0.5
-
-# eeta_p: {x: 0.2, y: 0.2, z: 0.2}
-# eeta_q: 0.2
-# var_pi_p: 0.1
-# var_pi_q: 0.1
-# theta_p: {x: 2, y: 2, z: 2}
-# theta_q: {x: 5, y: 5, z: 5}
-
-
-# m_cap: 2.32
-# length: 0.3
 # side: 0.2
 # gravity: 9.81
-# arm_length: 0.24
-# rotor_mass: 0.08
-# payload: 0.5
-
-# eeta_p: {x: 6, y: 6, z: 1}
-# eeta_q: 0.3
-# var_pi_p: 1
-# var_pi_q: 1
-# theta_p: {x: 2.5, y: 2.5, z: 2.5}
-# theta_q: {x: 4.5, y: 4.5, z: 3.5}
-
-
-# m_cap: 2.32
-# length: 0.3
-# side: 0.2
-# gravity: 9.81
-# arm_length: 0.24
-# rotor_mass: 0.08
-# payload: 0.6
+# arm_length: 0.21
+# rotor_mass: 0.01
+# payload: 0.4
+# payload_mass: 0.4
 
 # eeta_p: {x: 4, y: 4, z: 4}
 # eeta_q: 0.3
 # var_pi_p: 1
 # var_pi_q: 1
-
-# theta_p: {x: 1.5, y: 1.5, z: 1.5}
-# theta_q: {x: 3.5, y: 3.5, z: 3.5}
-
-
-
-# m_cap: 2.32
-# eeta_p: {x: 4, y: 4, z: 4}
-# eeta_q: 0.3
-# length: 0.3
-# side: 0.2
-# gravity: 9.81
-# arm_length: 0.24
-# payload: 0.5
-# rotor_mass: 0.08
-# var_pi_p: 1
-# var_pi_q: 1
-
-# theta_p: {x: 1.5, y: 1.5, z: 1.5}
-# theta_q: {x: 4.5, y: 4.5, z: 4.5} 
+# theta_p: {x: 3, y: 3, z: 3}
+# theta_q: {x: 3, y: 3, z: 3}
 

@@ -28,8 +28,9 @@ generate_messages(
 
 catkin_package(
   INCLUDE_DIRS include ${Eigen_INCLUDE_DIRS}
-  LIBRARIES  pid_position_controller smc_position_controller asmc_position_controller 
+  LIBRARIES  pid_position_controller elas_smc_position_controller smc_position_controller asmc_position_controller 
   autde_position_controller reconfig_pid_controller sb_position_controller rsb_position_controller
+  rsbv_position_controller
   CATKIN_DEPENDS geometry_msgs mav_msgs nav_msgs roscpp rospy sensor_msgs
       message_runtime serial_comm mav_trajectory_generation_ros msg_check
   DEPENDS Eigen
@@ -53,6 +54,10 @@ add_library(smc_position_controller
   src/library/smc_position_controller.cpp
 )
 
+add_library(elas_smc_position_controller
+  src/library/elas_smc_position_controller.cpp
+)
+
 add_library(asmc_position_controller
   src/library/asmc_position_controller.cpp
 )
@@ -69,6 +74,10 @@ add_library(rsb_position_controller
   src/library/rsb_position_controller.cpp
 )
 
+add_library(rsbv_position_controller
+  src/library/rsbv_position_controller.cpp
+)
+
 target_link_libraries(pid_position_controller ${catkin_LIBRARIES})
 add_dependencies(pid_position_controller ${catkin_EXPORTED_TARGETS})
 
@@ -80,6 +89,9 @@ add_dependencies(reconfig_pid_controller ${catkin_EXPORTED_TARGETS})
 
 target_link_libraries(smc_position_controller ${catkin_LIBRARIES})
 add_dependencies(smc_position_controller ${catkin_EXPORTED_TARGETS})
+
+target_link_libraries(elas_smc_position_controller ${catkin_LIBRARIES})
+add_dependencies(elas_smc_position_controller ${catkin_EXPORTED_TARGETS})
 
 target_link_libraries(asmc_position_controller ${catkin_LIBRARIES})
 add_dependencies(asmc_position_controller ${catkin_EXPORTED_TARGETS})
@@ -93,6 +105,9 @@ add_dependencies(sb_position_controller ${catkin_EXPORTED_TARGETS})
 target_link_libraries(rsb_position_controller ${catkin_LIBRARIES})
 add_dependencies(rsb_position_controller ${catkin_EXPORTED_TARGETS})
 
+target_link_libraries(rsbv_position_controller ${catkin_LIBRARIES})
+add_dependencies(rsbv_position_controller ${catkin_EXPORTED_TARGETS})
+
 
 add_executable(pid_position_controller_node src/nodes/pid_position_controller_node.cpp)
 add_dependencies(pid_position_controller_node ${catkin_EXPORTED_TARGETS})
@@ -102,6 +117,12 @@ target_link_libraries(pid_position_controller_node
 add_executable(reconfig_pid_controller_node src/nodes/reconfig_pid_controller_node.cpp)
 add_dependencies(reconfig_pid_controller_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(reconfig_pid_controller_node
+  reconfig_pid_controller ${catkin_LIBRARIES})
+
+
+add_executable(reconfig_pid_controller_node_sim src/nodes/reconfig_pid_controller_node_sim.cpp)
+add_dependencies(reconfig_pid_controller_node_sim ${catkin_EXPORTED_TARGETS})
+target_link_libraries(reconfig_pid_controller_node_sim
   reconfig_pid_controller ${catkin_LIBRARIES})
 
 # add_executable(roll_pitch_yawrate_thrust_controller_node
@@ -114,6 +135,11 @@ add_executable(smc_position_controller_node src/nodes/smc_position_controller_no
 add_dependencies(smc_position_controller_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(smc_position_controller_node
   smc_position_controller ${catkin_LIBRARIES})
+
+add_executable(elas_smc_position_controller_node src/nodes/elas_smc_position_controller_node.cpp)
+add_dependencies(elas_smc_position_controller_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(elas_smc_position_controller_node
+  elas_smc_position_controller ${catkin_LIBRARIES})
 
 add_executable(asmc_position_controller_node src/nodes/asmc_position_controller_node.cpp)
 add_dependencies(asmc_position_controller_node ${catkin_EXPORTED_TARGETS})
@@ -135,6 +161,15 @@ add_dependencies(rsb_position_controller_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(rsb_position_controller_node
   rsb_position_controller ${catkin_LIBRARIES})
 
+add_executable(rsbv_position_controller_node src/nodes/rsbv_position_controller_node.cpp)
+add_dependencies(rsbv_position_controller_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(rsbv_position_controller_node
+  rsbv_position_controller ${catkin_LIBRARIES})
+
+
+add_executable(points_publisher src/nodes/points_publisher.cpp)
+target_link_libraries(points_publisher ${catkin_LIBRARIES})
+add_dependencies(points_publisher ${catkin_EXPORTED_TARGETS})
 
 add_executable(waypoint_publisher src/nodes/waypoint_publisher.cpp)
 target_link_libraries(waypoint_publisher ${catkin_LIBRARIES})
@@ -154,14 +189,17 @@ foreach(dir launch resource)
 endforeach(dir)
 
 
-install(TARGETS pid_position_controller smc_position_controller asmc_position_controller 
+install(TARGETS pid_position_controller elas_smc_position_controller smc_position_controller asmc_position_controller 
   autde_position_controller reconfig_pid_controller sb_position_controller rsb_position_controller
+  rsbv_position_controller
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 )
 
 install(TARGETS pid_position_controller_node asmc_position_controller_node autde_position_controller_node
- smc_position_controller_node waypoint_publisher hovering_example hovering_smooth 
- reconfig_pid_controller sb_position_controller_node rsb_position_controller_node
+  elas_smc_position_controller_node smc_position_controller_node 
+  waypoint_publisher points_publisher hovering_example hovering_smooth 
+  reconfig_pid_controller_node  reconfig_pid_controller_node_sim
+  sb_position_controller_node rsb_position_controller_node rsbv_position_controller_node
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

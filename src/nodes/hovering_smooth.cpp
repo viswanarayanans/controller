@@ -67,11 +67,11 @@ while(ros::ok())
     start.makeStartOrEnd(Eigen::Vector3d(0, 0, 0), derivative_to_optimize);
     vertices.push_back(start);
 
-    middle.addConstraint(mav_trajectory_generation::derivative_order::POSITION, Eigen::Vector3d(0.5, 0.5, 0.5));
+    middle.addConstraint(mav_trajectory_generation::derivative_order::POSITION, Eigen::Vector3d(-0.5, -0.5, 0.5));
     vertices.push_back(middle);
 
 
-    end.makeStartOrEnd(Eigen::Vector3d(1, 1, 1), derivative_to_optimize);
+    end.makeStartOrEnd(Eigen::Vector3d(-1, -1, 1), derivative_to_optimize);
     vertices.push_back(end);
 
 

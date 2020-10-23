@@ -214,7 +214,7 @@ void PidPositionControllerNode::OdometryCallback(const nav_msgs::OdometryConstPt
 
 
   motor_velocity_reference_pub_.publish(actuator_msg);
-  comm_.sendSerial(ref_rotor_velocities);
+  // comm_.sendSerial(ref_rotor_velocities);
   plot_data_pub_.publish(data_out_);
 }
                                                   
@@ -238,7 +238,7 @@ void PidPositionControllerNode::PoseCallback(const geometry_msgs::PoseWithCovari
   data_out_.header.stamp = msg->header.stamp;
 
 
-  motor_velocity_reference_pub_.publish(actuator_msg);
+  // motor_velocity_reference_pub_.publish(actuator_msg);
   // comm_.sendSerial(ref_rotor_velocities);
   plot_data_pub_.publish(data_out_);
 }
