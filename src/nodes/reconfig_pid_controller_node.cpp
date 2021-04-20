@@ -271,7 +271,7 @@ void ReconfigPidControllerNode::OdometryCallback(const nav_msgs::OdometryConstPt
 void ReconfigPidControllerNode::PoseCallback(const geometry_msgs::PoseWithCovarianceStampedConstPtr& msg) {
   ROS_INFO_STREAM("ReconfigPidController got first tag message.");
 
-  eigenOdometryFromPoseMsg(msg, &odometry);
+  eigenOdometryFromPoseCovMsg(msg, &odometry);
 
   reconfig_pid_controller_.SetOdometry(odometry);
 

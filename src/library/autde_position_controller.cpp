@@ -220,7 +220,7 @@ void AuTdePositionController::CalculateThrust(Eigen::Vector3d* thrust,
   // tf::vectorEigenToMsg(rho_p, data_out->rho_p);
   // tf::vectorEigenToMsg(delTau_p, data_out->delTau_p);
 
-  data_out->M_hat = hatM;
+  data_out->M1_hat = hatM;
 }
 
 // Implementation from the T. Lee et al. paper

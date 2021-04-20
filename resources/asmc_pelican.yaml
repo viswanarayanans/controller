@@ -1,213 +1,7 @@
-# Centralized control
-# Set 1
-# theta_p: 1.5
-# theta_q: 4.5
-
-# alpha: {'0': 0.5, '1': 0.5, '2': 0.5}
-
-# hatKp: {'0': 50, '1': 10, '2': 5}
-# hatKq: {'0': 0.01, '1': 0.01, '2': 0.01}
-
-# lam_p: {x: 2.7, y: 2.7, z: 7}
-# lam_q: {x: 0.22, y: 0.22, z: 0.01}
-
-# var_pi: 0.1
-
-
-# Set 2
-
-# theta_p: 1.5
-# theta_q: 4.5
-
-# alpha: {'0': 0.5, '1': 0.5, '2': 0.5}
-
-# hatKp: {'0': 100, '1': 40, '2': 20}
-# hatKq: {'0': 0.01, '1': 0.01, '2': 0.01}
-
-# lam_p: {x: 2.7, y: 2.7, z: 10}
-# lam_q: {x: 0.12, y: 0.12, z: 0.005}
-
-# var_pi: 0.1
-
-
-
-# Decentralized with no deltau_q
-# Set 1 Height Offset: 0.5
-# theta_p: {x: 1.5, y: 1.5, z: 1.5}
-# lam_p: {x: 2.7, y: 2.7, z: 2.7}
-# alpha_p: {x: 1, y: 1, z: 1}
-# hatKp: {x: 0.1, y: 0.1, z: 0.1}
-
-
-# theta_q: {x: 4.5, y: 4.5, z: 3.5}
-
-# alpha_q0: {x: 1500, y: 15, z: 15}
-# alpha_q1: {x: 1500, y: 15, z: 15}
-# alpha_q2: {x: 1500, y: 15, z: 15}
-
-# hatKq_0: {x: 0.001, y: 0.001, z: 0.001}
-# hatKq_1: {x: 0.001, y: 0.001, z: 0.001}
-# hatKq_2: {x: 0.001, y: 0.001, z: 0.001}
-
-# lam_q: {x: 0.22, y: 0.22, z: 0.01}
-
-# alphaM: 10
-# hatM: 10
-# var_pi: 0.1
-
-# Set 2 Height offset: 0.3
-# theta_p: {x: 1.8, y: 1.8, z: 1.8}
-# lam_p: {x: 2.4, y: 2.4, z: 2.4}
-# alpha_p: {x: 7, y: 7, z: 7}
-# hatKp: {x: 0.001, y: 0.001, z: 0.001}
-
-
-# theta_q: {x: 4.5, y: 4.5, z: 3.5}
-
-# alpha_q0: {x: 1500, y: 15, z: 15}
-# alpha_q1: {x: 1500, y: 15, z: 15}
-# alpha_q2: {x: 1500, y: 15, z: 15}
-
-# hatKq_0: {x: 0.001, y: 0.001, z: 0.001}
-# hatKq_1: {x: 0.001, y: 0.001, z: 0.001}
-# hatKq_2: {x: 0.001, y: 0.001, z: 0.001}
-
-# lam_q: {x: 0.22, y: 0.22, z: 0.01}
-
-# alphaM: 6
-# hatM: 0.0001
-# var_pi: 0.1
-
-# Set 3 Height offset: 0.16
-# theta_p: {x: 1.2, y: 1.2, z: 1.1}
-# lam_p: {x: 2.4, y: 2.4, z: 12}
-# alpha_p: {x: 7, y: 7, z: 7}
-# hatKp: {x: 0.001, y: 0.001, z: 0.001}
-
-
-# theta_q: {x: 4.5, y: 4.5, z: 3.5}
-
-# alpha_q0: {x: 1500, y: 15, z: 15}
-# alpha_q1: {x: 1500, y: 15, z: 15}
-# alpha_q2: {x: 1500, y: 15, z: 15}
-
-# hatKq_0: {x: 0.001, y: 0.001, z: 0.001}
-# hatKq_1: {x: 0.001, y: 0.001, z: 0.001}
-# hatKq_2: {x: 0.001, y: 0.001, z: 0.001}
-
-# lam_q: {x: 0.22, y: 0.22, z: 0.01}
-
-# alphaM: 2
-# hatM: 0.0001
-# var_pi: 0.1
-
-# Set 4 Height offset: 0.09
-# theta_p: {x: 1.2, y: 1.2, z: 1.1}
-# lam_p: {x: 2.4, y: 2.4, z: 16}
-# alpha_p: {x: 6, y: 6, z: 6}
-# hatKp: {x: 0.001, y: 0.001, z: 0.001}
-
-
-# theta_q: {x: 4.5, y: 4.5, z: 3.5}
-
-# alpha_q0: {x: 15, y: 15, z: 15}
-# alpha_q1: {x: 15, y: 15, z: 15}
-# alpha_q2: {x: 15, y: 15, z: 15}
-
-# hatKq_0: {x: 0.001, y: 0.001, z: 0.001}
-# hatKq_1: {x: 0.001, y: 0.001, z: 0.001}
-# hatKq_2: {x: 0.001, y: 0.001, z: 0.001}
-
-# lam_q: {x: 0.22, y: 0.22, z: 0.01}
-
-# alphaM: 1
-# hatM: 0.01
-# var_pi: 0.1
-
-
-# WIth attitude control sq_norm = abs(angle_error)
-# Set 1 Height offset: 
-# theta_p: {x: 1.5, y: 1.5, z: 1}
-# lam_p: {x: 2.4, y: 2.4, z: 16}
-# alpha_p: {x: 6, y: 6, z: 6}
-# hatKp: {x: 0.001, y: 0.001, z: 0.001}
-
-
-# theta_q: {x: 4.5, y: 4.5, z: 3.5}
-
-# alpha_q0: {x: 20, y: 20, z: 10.00001}
-# alpha_q1: {x: 20, y: 20, z: 10.00001}
-# alpha_q2: {x: 20, y: 20, z: 10.00001}
-
-# hatKq_0: {x: 0.0001, y: 0.0001, z: 0.0001}
-# hatKq_1: {x: 0.0001, y: 0.0001, z: 0.0001}
-# hatKq_2: {x: 0.0001, y: 0.0001, z: 0.0001}
-
-# lam_q: {x: 0.22, y: 0.22, z: 0.01}
-
-# alphaM: 0.8
-# hatM: 0.01
-# var_pi_p: 0.1
-# var_pi_q: 0.1 
-
-
-# Set 2 sq_norm = abs(sq)
-# Oscillatory
-# theta_p: {x: 1.5, y: 1.5, z: 1}
-# lam_p: {x: 2.4, y: 2.4, z: 16}
-# alpha_p: {x: 6, y: 6, z: 6}
-# hatKp: {x: 0.001, y: 0.001, z: 0.001}
-
-
-# theta_q: {x: 4.5, y: 4.5, z: 3.5}
-
-# alpha_q0: {x: 22, y: 22, z: 22}
-# alpha_q1: {x: 22, y: 22, z: 22}
-# alpha_q2: {x: 22, y: 22, z: 22}
-
-# hatKq_0: {x: 0.0001, y: 0.0001, z: 0.0001}
-# hatKq_1: {x: 0.0001, y: 0.0001, z: 0.0001}
-# hatKq_2: {x: 0.0001, y: 0.0001, z: 0.0001}
-
-# lam_q: {x: 0.22, y: 0.22, z: 0.01}
-
-# alphaM: 1
-# hatM: 0.01
-# var_pi_p: 0.1
-# var_pi_q: 1 
-
-
-# Set 3 sq_norm = abs(sq)
-# Working Needs to fine tune
-# theta_p: {x: 1.5, y: 1.5, z: 1}
-# lam_p: {x: 2.4, y: 2.4, z: 16}
-# alpha_p: {x: 6, y: 6, z: 6}
-# hatKp: {x: 0.001, y: 0.001, z: 0.001}
-
-
-# theta_q: {x: 4.5, y: 4.5, z: 3.5}
-
-# alpha_q0: {x: 50, y: 30, z: 50}
-# alpha_q1: {x: 50, y: 30, z: 50}
-# alpha_q2: {x: 50, y: 30, z: 50}
-
-# hatKq_0: {x: 0.0001, y: 0.0001, z: 0.0001}
-# hatKq_1: {x: 0.0001, y: 0.0001, z: 0.0001}
-# hatKq_2: {x: 0.0001, y: 0.0001, z: 0.0001}
-
-# lam_q: {x: 0.22, y: 0.22, z: 0.01}
-
-# alphaM: 1
-# hatM: 0.01
-# var_pi_p: 0.1
-# var_pi_q: 1 
-
-
-
 # Set 4 sq_norm = abs(sq)
 # Stable
 # Weight set to 2 kg length set to 24 cm
-theta_p: {x: 1.2, y: 1.2, z: 1.2}
+theta_p: {x: 1.2, y: 1.2, z: 0.8}
 lam_p: {x: 2.4, y: 2.4, z: 16}
 alpha_p: {x: 4, y: 4, z: 4}
 hatKp: {x: 0.001, y: 0.001, z: 0.001}
@@ -231,52 +25,26 @@ var_pi_p: 0.1
 var_pi_q: 1 
 
 
-# Set 5 sq_norm = abs(sq)
-
-# f450 config
-# theta_p: {x: 1, y: 1, z: 0.8}
-# lam_p: {x: 2.4, y: 2.4, z: 16}
-# alpha_p: {x: 4, y: 4, z: 4}
-# hatKp: {x: 0.01, y: 0.01, z: 0.01}
-
-
-# theta_q: {x: 3.5, y: 3.5, z: 3.5}
-
-# alpha_q0: {x: 5, y: 5, z: 5}
-# alpha_q1: {x: 5, y: 5, z: 5}
-# alpha_q2: {x: 5, y: 5, z: 5}
-
-# hatKq_0: {x: 0.001, y: 0.001, z: 0.001}
-# hatKq_1: {x: 0.001, y: 0.001, z: 0.001}
-# hatKq_2: {x: 0.001, y: 0.001, z: 0.001}
-
-# lam_q: {x: 0.5, y: 0.5, z: 0.01}
-
-# alphaM: 0.1
-# hatM: 0.1
-# var_pi_p: 0.1
-# var_pi_q: 1
 
 # Set 5 sq_norm = abs(sq)
 
-# f450 config
 # theta_p: {x: 1, y: 1, z: 0.8}
 # lam_p: {x: 2.4, y: 2.4, z: 16}
 # alpha_p: {x: 4, y: 4, z: 4}
 # hatKp: {x: 0.001, y: 0.001, z: 0.001}
 
 
-# theta_q: {x: 1.5, y: 1.5, z: 3.5}
+# theta_q: {x: 3, y: 3, z: 3}
 
-# alpha_q0: {x: 50, y: 50, z: 50}
-# alpha_q1: {x: 50, y: 50, z: 50}
-# alpha_q2: {x: 50, y: 50, z: 50}
+# alpha_q0: {x: 50, y: 50, z: 40}
+# alpha_q1: {x: 50, y: 50, z: 40}
+# alpha_q2: {x: 50, y: 50, z: 40}
 
 # hatKq_0: {x: 0.0001, y: 0.0001, z: 0.0001}
 # hatKq_1: {x: 0.0001, y: 0.0001, z: 0.0001}
 # hatKq_2: {x: 0.0001, y: 0.0001, z: 0.0001}
 
-# lam_q: {x: 0.5, y: 0.5, z: 0.01}
+# lam_q: {x: 0.2, y: 0.2, z: 0.01}
 
 # alphaM: 0.1
 # hatM: 0.1

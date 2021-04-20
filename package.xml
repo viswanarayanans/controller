@@ -30,6 +30,8 @@
   <build_depend>eigen_conversions</build_depend>
   <build_depend>serial_comm</build_depend>
   <build_depend>msg_check</build_depend>
+  <build_depend>controller_msgs</build_depend>
+  <!-- <build_depend>geometric_controller</build_depend> -->
   <build_depend>mav_trajectory_generation_ros</build_depend>
   <!-- <build_depend>apriltag</build_depend> -->
   <!-- <build_depend>apriltag_ros</build_depend> -->
@@ -48,6 +50,8 @@
   <run_depend>eigen_conversions</run_depend>
   <run_depend>serial_comm</run_depend>
   <run_depend>msg_check</run_depend>
+  <run_depend>controller_msgs</run_depend>
+  <!-- <run_depend>geometric_controller</run_depend> -->
   <run_depend>mav_trajectory_generation_ros</run_depend>
 
 

@@ -180,7 +180,40 @@ inline void vectorFromSkewMatrix(Eigen::Matrix3d& skew_matrix, Eigen::Vector3d* 
   *vector << skew_matrix(2, 1), skew_matrix(0,2), skew_matrix(1, 0);
 }
 
-inline void eigenOdometryFromPoseMsg(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg,
+
+inline void eigenOdometryFromPoseMsg(const geometry_msgs::PoseStamped::ConstPtr& msg,
+                                 EigenOdometry* odometry) {
+  assert(odometry);
+
+  double dt = (double)(msg->header.stamp.toNSec() - odometry->timestamp_ns) * 1e-9;
+  if (dt > 0.05){
+    dt = 0.05;
+  }
+  else if (dt < 0.01){
+    dt = 0.01;
+  }
+
+  odometry->velocity = (mav_msgs::vector3FromPointMsg(msg->pose.position) - 
+                          odometry->position) / dt;
+  Eigen::Matrix3d R_cur = (mav_msgs::quaternionFromMsg(msg->pose.orientation)).toRotationMatrix(); 
+  Eigen::Matrix3d R_pre = (odometry->orientation).toRotationMatrix();
+
+  Eigen::Matrix3d R_diff =  0.5 * (R_pre.transpose() * R_cur - R_cur.transpose() * R_pre);
+  Eigen::Vector3d angle_diff;
+  vectorFromSkewMatrix(R_diff, &angle_diff);
+  odometry->angular_velocity = angle_diff / dt;
+
+  odometry->timestamp_ns = msg->header.stamp.toNSec();
+  odometry->position = mav_msgs::vector3FromPointMsg(msg->pose.position);
+  odometry->orientation = mav_msgs::quaternionFromMsg(msg->pose.orientation);
+
+  // odometry->position = mav_msgs::vector3FromPointMsg(msg->pose.position);
+  // odometry->orientation = mav_msgs::quaternionFromMsg(msg->pose.pose.orientation);
+  // odometry->velocity = mav_msgs::vector3FromMsg(msg->twist.twist.linear);
+  // odometry->angular_velocity = mav_msgs::vector3FromMsg(msg->twist.twist.angular);
+}
+
+inline void eigenOdometryFromPoseCovMsg(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg,
                                  EigenOdometry* odometry) {
   assert(odometry);
 
@@ -205,6 +238,7 @@ inline void eigenOdometryFromPoseMsg(const geometry_msgs::PoseWithCovarianceStam
   // odometry->velocity = mav_msgs::vector3FromMsg(msg->twist.twist.linear);
   // odometry->angular_velocity = mav_msgs::vector3FromMsg(msg->twist.twist.angular);
 }
+
 }
 
 #endif /* INCLUDE_ASMC_CONTROL_COMMON_H_ */

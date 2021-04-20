@@ -1,0 +1,22 @@
+theta_p: {x: 1, y: 1, z: 0.8}
+lam_p: {x: 3, y: 3, z: 16}
+alpha_p: {x: 1, y: 1, z: 1}
+hatKp: {x: 0.001, y: 0.001, z: 0.001}
+
+
+theta_q: {x: 4, y: 5, z: 1}
+
+alpha_q0: {x: 50, y: 50, z: 50}
+alpha_q1: {x: 50, y: 50, z: 50}
+alpha_q2: {x: 50, y: 50, z: 50}
+
+hatKq_0: {x: 0.0001, y: 0.0001, z: 0.0001}
+hatKq_1: {x: 0.0001, y: 0.0001, z: 0.0001}
+hatKq_2: {x: 0.0001, y: 0.0001, z: 0.0001}
+
+lam_q: {x: 0.4, y: 0.52, z: 0.3}
+
+alphaM: 0.1
+hatM:  0.01
+var_pi_p: 0.1
+var_pi_q: 1 

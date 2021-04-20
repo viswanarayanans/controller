@@ -1,7 +1,7 @@
 # Pelican vehicle parameters
-mass: 2.0
+mass: 1.0
 payload_mass: 0.0
-inertia: {xx: 0.02, xy: 0.0, xz: 0.0, yy: 0.02, yz: 0.0, zz: 0.04}
+inertia: {xx: 0.01, xy: 0.0, xz: 0.0, yy: 0.01, yz: 0.0, zz: 0.02}
 
 # angle should be expressed in rad
 # direction 1 means counter clockwise, -1 clockwise

@@ -1,5 +1,5 @@
 # Decent
-m_cap: 2.0
+m_cap: 1.0
 
 length: 0.3
 side: 0.21
@@ -9,12 +9,12 @@ rotor_mass: 0.01
 payload: 0.4
 payload_mass: 0.4
 
-eeta_p: {x: 4, y: 4, z: 4}
-eeta_q: 0.3
+eeta_p: {x: 1, y: 1, z: 1}
+eeta_q: 0.2
 var_pi_p: 1
 var_pi_q: 1
-theta_p: {x: 3, y: 3, z: 3}
-theta_q: {x: 3, y: 3, z: 3}
+theta_p: {x: 5, y: 5, z: 4}
+theta_q: {x: 2, y: 2, z: 0.5}
 
 # # Decent
 # m_cap: 2.0

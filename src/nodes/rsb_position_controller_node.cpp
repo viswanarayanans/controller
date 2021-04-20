@@ -326,7 +326,7 @@ void RsbPositionControllerNode::OdometryCallback(const nav_msgs::OdometryConstPt
 void RsbPositionControllerNode::PoseCallback(const geometry_msgs::PoseWithCovarianceStampedConstPtr& msg) {
   ROS_INFO_STREAM("RsbPositionController got first tag message.");
 
-  eigenOdometryFromPoseMsg(msg, &odometry);
+  eigenOdometryFromPoseCovMsg(msg, &odometry);
 
   rsb_position_controller_.SetOdometry(odometry);
 

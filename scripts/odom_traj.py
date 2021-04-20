@@ -10,6 +10,7 @@ from msg_check.msg import PlotDataMsg
 
 def traj_callback(data):
 	global first_msg, t
+	print("Traj")
 	ftraj.write("\nTrajectory:")
 	ftraj.write("\nsecs:")
 	ftraj.write(str(data.header.stamp.secs))
@@ -29,14 +30,6 @@ def traj_callback(data):
 	ftraj.write(str(data.points[0].transforms[0].rotation.z))
 	ftraj.write("\na_w:")
 	ftraj.write(str(data.points[0].transforms[0].rotation.w))
-	# ftraj.write("\ntime:")
-	# if(first_msg == 1):
-		# t1 = 10
-		# t = time.time() - 10
-	# 	first_msg = 0
-	# else:
-	# 	t1 = time.time() - t
-	# ftraj.write(str(t1))
 	ftraj.write("\n")
 	
 
@@ -63,6 +56,7 @@ def odom_callback(data):
 
 
 def error_callback(data):
+	print("Poda Naaye")
 	ferror.write("\nError:")
 	ferror.write("\nsecs:")
 	ferror.write(str(data.header.stamp.secs))
@@ -94,14 +88,14 @@ if __name__ == '__main__':
     rospy.init_node('odom_traj',anonymous=True)
     global first_msg, t
     first_msg = 1
-    fodom = open("icra_2021/odom_elas_elong_wall.txt","w")
-    ferror = open("icra_2021/error_elas_elong_wall.txt","w")
-    ftraj = open("icra_2021/traj_elas_elong_wall.txt","w")
+    fodom = open("iros_2021/ring/odom_smc.txt","w")
+    ferror = open("iros_2021/ring/error_smc.txt","w")
+    ftraj = open("iros_2021/ring/traj_smc.txt","w")
     t = time.time()
 
     # Subsciber
-    rospy.Subscriber("/command/trajectory", MultiDOFJointTrajectory, traj_callback)
-    rospy.Subscriber("/elasticopter/odometry_sensor1/odometry", Odometry, odom_callback)
+    rospy.Subscriber("/pelican/command/trajectory", MultiDOFJointTrajectory, traj_callback)
+    rospy.Subscriber("/pelican/odometry_sensor1/odometry", Odometry, odom_callback)
     rospy.Subscriber("/data_out", PlotDataMsg, error_callback)
 
     # Publisher

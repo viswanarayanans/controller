@@ -140,12 +140,12 @@ void ASmcPositionController::CalculateThrust(Eigen::Vector3d* thrust,
   tf::vectorEigenToMsg(position_error, data_out->position_error);
   tf::vectorEigenToMsg(velocity_error, data_out->velocity_error);
 
-  tf::vectorEigenToMsg(hatKp, data_out->Kp_hat);
+  tf::vectorEigenToMsg(hatKp, data_out->Kp1_hat);
   tf::vectorEigenToMsg(sp, data_out->sp);
-  tf::vectorEigenToMsg(rho_p, data_out->rho_p);
+  tf::vectorEigenToMsg(rho_p, data_out->zeta_p);
   tf::vectorEigenToMsg(delTau_p, data_out->delTau_p);
 
-  data_out->M_hat = hatM;
+  data_out->M1_hat = hatM;
 }
 
 // Implementation from the T. Lee et al. paper
@@ -257,11 +257,11 @@ void ASmcPositionController::CalculateMoments(Eigen::Vector3d force,
     tf::vectorEigenToMsg(angle_error, data_out->angle_error);
     tf::vectorEigenToMsg(angular_rate_error, data_out->angle_rate_error);
 
-    tf::vectorEigenToMsg(hatKq_0, data_out->Kq_hat_0);
-    tf::vectorEigenToMsg(hatKq_1, data_out->Kq_hat_1);
-    tf::vectorEigenToMsg(hatKq_2, data_out->Kq_hat_2);
+    tf::vectorEigenToMsg(hatKq_0, data_out->Kq1_hat_0);
+    tf::vectorEigenToMsg(hatKq_1, data_out->Kq1_hat_1);
+    tf::vectorEigenToMsg(hatKq_2, data_out->Kq1_hat_2);
     tf::vectorEigenToMsg(sq, data_out->sq);
-    tf::vectorEigenToMsg(rho_q, data_out->rho_q);
+    tf::vectorEigenToMsg(rho_q, data_out->zeta_q);
     tf::vectorEigenToMsg(delTau_q, data_out->delTau_q);
 
   }

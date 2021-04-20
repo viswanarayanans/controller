@@ -173,7 +173,7 @@ void SmcPositionController::ComputeThrust(Eigen::Vector3d* thrust,
   tf::vectorEigenToMsg(position_error, data_out->position_error);
   tf::vectorEigenToMsg(velocity_error, data_out->velocity_error);
 
-  tf::vectorEigenToMsg(kp, data_out->Kp_hat);
+  tf::vectorEigenToMsg(kp, data_out->Kp1_hat);
   tf::vectorEigenToMsg(sp, data_out->sp);
   tf::vectorEigenToMsg(delTau_p, data_out->delTau_p);
 }
@@ -257,7 +257,7 @@ void SmcPositionController::CalculateMoments(Eigen::Vector3d force,
     tf::vectorEigenToMsg(angle_error, data_out->angle_error);
     tf::vectorEigenToMsg(angular_rate_error, data_out->angle_rate_error);
 
-    tf::vectorEigenToMsg(kq, data_out->Kq_hat_0);
+    tf::vectorEigenToMsg(kq, data_out->Kq1_hat_0);
     tf::vectorEigenToMsg(sq, data_out->sq);
     tf::vectorEigenToMsg(delTau_q, data_out->delTau_q);
   }

@@ -1,0 +1,104 @@
+<launch>
+  <arg name="mav_name" default="pelican"/>
+  <arg name="controller_name" default="sac"/>
+  <arg name="world_name" default="basic"/>
+  <arg name="enable_logging" default="false" />
+  <arg name="enable_ground_truth" default="true" />
+  <arg name="log_file" default="$(arg mav_name)" />
+  <arg name="debug" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="true"/>
+  <!-- The following line causes gzmsg and gzerr messages to be printed to the console
+      (even when Gazebo is started through roslaunch) -->
+  <arg name="verbose" default="false"/>
+
+  <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find rotors_gazebo)/models"/>
+  <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find rotors_gazebo)/models"/>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find rrc_control)/worlds/$(arg world_name).world" />
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="paused" value="$(arg paused)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="verbose" value="$(arg verbose)"/>
+  </include>
+
+  <group ns="$(arg mav_name)">
+    <include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
+      <arg name="mav_name" value="$(arg mav_name)" />
+      <arg name="model" value="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo" />
+      <arg name="enable_logging" value="$(arg enable_logging)" />
+      <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
+      <arg name="log_file" value="$(arg log_file)"/>
+    </include>
+    <node name="position_controller_node" pkg="rrc_control" type="$(arg controller_name)_position_controller_node" output="screen">      
+      <rosparam command="load" file="$(find rrc_control)/resources/$(arg controller_name)_$(arg mav_name).yaml" />
+      <rosparam command="load" file="$(find rrc_control)/resources/$(arg mav_name).yaml" />
+      <remap from="odometry" to="odometry_sensor1/odometry" />
+    </node>
+    <!-- <node name="waypoint_publisher" pkg="rotors_gazebo" type="waypoint_publisher_file" output="screen" args="$(find rrc_control)/resources/ring_waypoints.txt" /> -->
+    <node name="ring_traj" pkg="rrc_control" type="ring_traj" output="screen" />
+  </group>
+
+  <param name="box0_desc" command="$(find xacro)/xacro --inorder '$(find rrc_control)/models/urdf/box0.xacro' namespace:='box0' mass:=0.4" />  
+  <param name="box1_desc" command="$(find xacro)/xacro --inorder '$(find rrc_control)/models/urdf/box1.xacro' namespace:='box1' mass:=1" />  
+  <node name="spawn_box0" pkg="gazebo_ros" type="spawn_model"
+   args="-param box0_desc
+         -urdf
+         -x 0.6
+         -y 0.0
+         -z 0.1
+         -model 'box0'"
+   respawn="false" output="screen">
+  </node>  
+  <node name="spawn_box1" pkg="gazebo_ros" type="spawn_model"
+   args="-param box1_desc
+         -urdf
+         -x -0.6
+         -y 0.0
+         -z 0.1
+         -model 'box1'"
+   respawn="false" output="screen">
+  </node>
+
+  <param name="cp1_desc" command="$(find xacro)/xacro --inorder '$(find rrc_control)/models/urdf/checkpoint.xacro' 
+    namespace:='cp1' scale_r:=0.1 altitude:=1 yaw:=1.5708" />  
+  <param name="cp2_desc" command="$(find xacro)/xacro --inorder '$(find rrc_control)/models/urdf/checkpoint.xacro' 
+    namespace:='cp2' scale_r:=0.1 altitude:=2 yaw:=0" />  
+  <node name="spawn_cp1" pkg="gazebo_ros" type="spawn_model"
+   args="-param cp2_desc
+         -urdf
+         -x 2.0
+         -y 0.0
+         -z 0.1
+         -model 'cp1'"
+   respawn="false" output="screen">
+  </node>
+  <node name="spawn_cp2" pkg="gazebo_ros" type="spawn_model"
+   args="-param cp1_desc
+         -urdf
+         -x 0.0
+         -y -2.0
+         -z 0.1
+         -model 'cp2'"
+   respawn="false" output="screen">
+  </node>  
+  <node name="spawn_cp3" pkg="gazebo_ros" type="spawn_model"
+   args="-param cp2_desc
+         -urdf
+         -x -2.0
+         -y 0.0
+         -z 0.1
+         -model 'cp3'"
+   respawn="false" output="screen">
+  </node>
+  <node name="spawn_cp4" pkg="gazebo_ros" type="spawn_model"
+   args="-param cp1_desc
+         -urdf
+         -x 0.0
+         -y 2.0
+         -z 0.1
+         -model 'cp4'"
+   respawn="false" output="screen">
+  </node>
+
+</launch>

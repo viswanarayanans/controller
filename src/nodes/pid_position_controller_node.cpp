@@ -49,6 +49,9 @@ PidPositionControllerNode::PidPositionControllerNode(
   pose_sub_ = nh_.subscribe("/odometry/pose", 1, 
                             &PidPositionControllerNode::PoseCallback, this);
 
+  mocap_sub_ = nh_.subscribe("/mocap_position/Robot_1/pose", 1, 
+                            &PidPositionControllerNode::MocapCallback, this);
+
   motor_velocity_reference_pub_ = nh_.advertise<mav_msgs::Actuators>(
       mav_msgs::default_topics::COMMAND_ACTUATORS, 1);
 
@@ -219,6 +222,31 @@ void PidPositionControllerNode::OdometryCallback(const nav_msgs::OdometryConstPt
 }
                                                   
 void PidPositionControllerNode::PoseCallback(const geometry_msgs::PoseWithCovarianceStampedConstPtr& msg) {
+  ROS_INFO_STREAM("PidPositionController got first tag message.");
+
+  eigenOdometryFromPoseCovMsg(msg, &odometry);
+
+  pid_position_controller_.SetOdometry(odometry);
+
+  Eigen::VectorXd ref_rotor_velocities;
+  pid_position_controller_.CalculateRotorVelocities(&ref_rotor_velocities, &data_out_);
+
+  // Todo(ffurrer): Do this in the conversions header.
+  mav_msgs::ActuatorsPtr actuator_msg(new mav_msgs::Actuators);
+
+  actuator_msg->angular_velocities.clear();
+  for (int i = 0; i < ref_rotor_velocities.size(); i++)
+    actuator_msg->angular_velocities.push_back(ref_rotor_velocities[i]);
+  actuator_msg->header.stamp = msg->header.stamp;
+  data_out_.header.stamp = msg->header.stamp;
+
+
+  // motor_velocity_reference_pub_.publish(actuator_msg);
+  // comm_.sendSerial(ref_rotor_velocities);
+  plot_data_pub_.publish(data_out_);
+}
+                                                  
+void PidPositionControllerNode::MocapCallback(const geometry_msgs::PoseStampedConstPtr& msg) {
   ROS_INFO_STREAM("PidPositionController got first tag message.");
 
   eigenOdometryFromPoseMsg(msg, &odometry);

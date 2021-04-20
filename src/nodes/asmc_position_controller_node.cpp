@@ -263,7 +263,7 @@ namespace rrc_control {
 	void ASmcPositionControllerNode::PoseCallback(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg) {
 	  ROS_INFO_ONCE("PidPositionController got first pose message.");
 
-	  eigenOdometryFromPoseMsg(msg, &odometry);  
+	  eigenOdometryFromPoseCovMsg(msg, &odometry);  
 
 	  position_controller_.SetOdometry(odometry);
 

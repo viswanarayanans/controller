@@ -70,6 +70,7 @@ class PidPositionControllerNode {
   ros::Subscriber cmd_pose_sub_;
   ros::Subscriber odometry_sub_;
   ros::Subscriber pose_sub_;
+  ros::Subscriber mocap_sub_;
 
   ros::Publisher motor_velocity_reference_pub_;
   ros::Publisher plot_data_pub_;
@@ -91,6 +92,7 @@ class PidPositionControllerNode {
   void OdometryCallback(const nav_msgs::OdometryConstPtr& odometry_msg);
 
   void PoseCallback(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg);
+  void MocapCallback(const geometry_msgs::PoseStamped::ConstPtr& msg);
    //void TagCallback(const apriltag_ros::AprilTagDetectionArray::ConstPtr& msg);
 
 };

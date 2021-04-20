@@ -1,0 +1,9 @@
+<launch>
+	<arg name="mav_name" default="pelican"/>
+	<arg name="controller_name" default="dummy"/>
+	<node name="trial_node" pkg="rrc_control" type="controller_node" output="screen">
+		<!-- <rosparam command="load" file="$(find rrc_control)/resources/$(arg controller_name)_controller_$(arg mav_name).yaml" /> -->
+		<!-- <rosparam command="load" file="$(find rrc_control)/resources/$(arg mav_name).yaml" /> -->
+		<param name="controller_name" type="double" value="Dummy Divine" />
+	</node>
+</launch>

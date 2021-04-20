@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 # from geometry_msgs.msg import PoseWithCovarianceStamped
-import geometry_msgs
-from tf.transformations import euler_from_quaternion
+# import geometry_msgs
+# from tf.transformations import euler_from_quaternion
 
 
 
@@ -112,14 +112,14 @@ with open('odom_pd.txt') as file:
 			time += float(k[1])/1000000000
 			odom_pd_time.append(time)
 
-euler_pd_phi = []
-euler_pd_theta = []
-euler_pd_psi = []
-for i in range(len(odom_pd_ax)):
-	euler = euler_from_quaternion(np.array([odom_pd_ax[i], odom_pd_ay[i], odom_pd_az[i], odom_pd_aw[i]]))
-	euler_pd_phi.append(euler[0])
-	euler_pd_theta.append(euler[1])
-	euler_pd_psi.append(euler[2])
+# euler_pd_phi = []
+# euler_pd_theta = []
+# euler_pd_psi = []
+# for i in range(len(odom_pd_ax)):
+# 	euler = euler_from_quaternion(np.array([odom_pd_ax[i], odom_pd_ay[i], odom_pd_az[i], odom_pd_aw[i]]))
+# 	euler_pd_phi.append(euler[0])
+# 	euler_pd_theta.append(euler[1])
+# 	euler_pd_psi.append(euler[2])
 
 
 
@@ -149,14 +149,14 @@ with open('odom_smc1_ring_wind.txt') as file:
 			time += float(k[1])/1000000000
 			odom_smc_time.append(time)
 
-euler_smc_phi = []
-euler_smc_theta = []
-euler_smc_psi = []
-for i in range(len(odom_smc_ax)):
-	euler = euler_from_quaternion(np.array([odom_smc_ax[i], odom_smc_ay[i], odom_smc_az[i], odom_smc_aw[i]]))
-	euler_smc_phi.append(euler[0])
-	euler_smc_theta.append(euler[1])
-	euler_smc_psi.append(euler[2])
+# euler_smc_phi = []
+# euler_smc_theta = []
+# euler_smc_psi = []
+# for i in range(len(odom_smc_ax)):
+# 	euler = euler_from_quaternion(np.array([odom_smc_ax[i], odom_smc_ay[i], odom_smc_az[i], odom_smc_aw[i]]))
+# 	euler_smc_phi.append(euler[0])
+# 	euler_smc_theta.append(euler[1])
+# 	euler_smc_psi.append(euler[2])
 
 
 with open('odom_sb.txt') as file:
@@ -184,14 +184,14 @@ with open('odom_sb.txt') as file:
 			odom_sb_time.append(time)
 
 
-euler_sb_phi = []
-euler_sb_theta = []
-euler_sb_psi = []
-for i in range(len(odom_sb_ax)):
-	euler = euler_from_quaternion(np.array([odom_sb_ax[i], odom_sb_ay[i], odom_sb_az[i], odom_sb_aw[i]]))
-	euler_sb_phi.append(euler[0])
-	euler_sb_theta.append(euler[1])
-	euler_sb_psi.append(euler[2])
+# euler_sb_phi = []
+# euler_sb_theta = []
+# euler_sb_psi = []
+# for i in range(len(odom_sb_ax)):
+# 	euler = euler_from_quaternion(np.array([odom_sb_ax[i], odom_sb_ay[i], odom_sb_az[i], odom_sb_aw[i]]))
+# 	euler_sb_phi.append(euler[0])
+# 	euler_sb_theta.append(euler[1])
+# 	euler_sb_psi.append(euler[2])
 
 
 with open('error_sb.txt') as file:
@@ -260,14 +260,14 @@ with open('odom_rsb1_ring_wind.txt') as file:
 			odom_rsb_time.append(time)
 
 
-euler_rsb_phi = []
-euler_rsb_theta = []
-euler_rsb_psi = []
-for i in range(len(odom_rsb_ax)):
-	euler = euler_from_quaternion(np.array([odom_rsb_ax[i], odom_rsb_ay[i], odom_rsb_az[i], odom_rsb_aw[i]]))
-	euler_rsb_phi.append(euler[0])
-	euler_rsb_theta.append(euler[1])
-	euler_rsb_psi.append(euler[2])
+# euler_rsb_phi = []
+# euler_rsb_theta = []
+# euler_rsb_psi = []
+# for i in range(len(odom_rsb_ax)):
+# 	euler = euler_from_quaternion(np.array([odom_rsb_ax[i], odom_rsb_ay[i], odom_rsb_az[i], odom_rsb_aw[i]]))
+# 	euler_rsb_phi.append(euler[0])
+# 	euler_rsb_theta.append(euler[1])
+# 	euler_rsb_psi.append(euler[2])
 
 
 with open('traj_rsb1_ring_wind.txt') as file:
@@ -303,14 +303,14 @@ with open('traj_rsb1_ring_wind.txt') as file:
 			traj_time.append(time)
 			traj_time.append(traj_time[-1])
 
-traj_phi = []
-traj_theta = []
-traj_psi = []
-for i in range(len(traj_ax)):
-	euler = euler_from_quaternion(np.array([traj_ax[i], traj_ay[i], traj_az[i], traj_aw[i]]))
-	traj_phi.append(euler[0])
-	traj_theta.append(euler[1])
-	traj_psi.append(euler[2])
+# traj_phi = []
+# traj_theta = []
+# traj_psi = []
+# for i in range(len(traj_ax)):
+# 	euler = euler_from_quaternion(np.array([traj_ax[i], traj_ay[i], traj_az[i], traj_aw[i]]))
+# 	traj_phi.append(euler[0])
+# 	traj_theta.append(euler[1])
+# 	traj_psi.append(euler[2])
 
 
 with open('error_rsb1_ring_wind.txt') as file:
@@ -438,7 +438,7 @@ traj_z.append(traj_z[-1])
 
 
 # fig = plt.figure(figsize=(6,12))
-# fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(16,8))
+# fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(8,4))
 # plt.subplot(311)
 # plt.plot(traj_time, traj_x, label='Desired trajectory', c='cyan', lw=4)
 # # plt.plot(odom_pd_time[:len(odom_smc_time)], odom_pd_x[:len(odom_smc_time)], label='PD', lw=2)
@@ -479,11 +479,11 @@ traj_z.append(traj_z[-1])
 
 # fig.tight_layout()
 # plt.show()
-# fig.savefig('ring_wind_traj_exp2.png')
+# fig.savefig('ring_wind_traj_exp3.png')
 
 
-# # fig = plt.figure(figsize=(6,12))
-# fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(16,8))
+# # # fig = plt.figure(figsize=(6,12))
+# fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(12,4))
 # plt.subplot(311)
 # # plt.plot(err_pd_time[:len(err_smc_time)], err_pd_x[:len(err_smc_time)], label='PD', lw=2)
 # plt.plot(err_smc_time[:len(err_smc_time)], err_smc_x[:len(err_smc_time)], '--', c='orange', label="SMC", lw=2)
@@ -532,67 +532,67 @@ traj_z.append(traj_z[-1])
 
 # fig.tight_layout(h_pad=0.4)
 # plt.show()
-# fig.savefig('ring_wind_pos_error_exp2.png')
+# fig.savefig('ring_wind_pos_error_exp3.png')
 
-# # fig = plt.figure(figsize=(6,12))
-fig, axes = plt.subplots(nrows=4, ncols=1, figsize=(16,8))
-plt.subplot(411)
-# plt.plot(err_pd_time[:len(err_smc_time)], err_pd_thrust[:len(err_smc_time)], label='PD', lw=2)
-plt.plot(err_smc_time[:len(err_smc_time)], err_smc_thrust[:len(err_smc_time)], '--', c='orange', label="SMC", lw=2)
-plt.plot(err_rsb_time[:len(err_smc_time)], err_rsb_thrust[:len(err_smc_time)], label="RSB(proposed)", lw=2)
-# plt.plot(err_sb_time[:len(err_sb_time)], err_sb_thrust[:len(err_sb_time)], label="SB", lw=2)
-# plt.plot([0,err_pd_time[-1]], [0,0])
-# plt.ylabel('x_err')
-plt.title('Thrust')
-plt.axis([0, err_smc_time[-1], -5, 40])
-plt.legend(loc=2, prop={'size': 10}, ncol=4)
+# # # fig = plt.figure(figsize=(6,12))
+# fig, axes = plt.subplots(nrows=4, ncols=1, figsize=(8,4))
+# plt.subplot(411)
+# # plt.plot(err_pd_time[:len(err_smc_time)], err_pd_thrust[:len(err_smc_time)], label='PD', lw=2)
+# plt.plot(err_smc_time[:len(err_smc_time)], err_smc_thrust[:len(err_smc_time)], '--', c='orange', label="SMC", lw=2)
+# plt.plot(err_rsb_time[:len(err_smc_time)], err_rsb_thrust[:len(err_smc_time)], label="RSB(proposed)", lw=2)
+# # plt.plot(err_sb_time[:len(err_sb_time)], err_sb_thrust[:len(err_sb_time)], c='red', label="SB", lw=2)
+# # plt.plot([0,err_pd_time[-1]], [0,0])
+# # plt.ylabel('x_err')
+# plt.title('Thrust')
+# plt.axis([0, err_smc_time[-1], -5, 40])
+# plt.legend(loc=2, prop={'size': 10}, ncol=4)
+# # plt.show()
+# # fig.savefig('err_x.png')
+
+
+# plt.subplot(412)
+# # plt.plot(err_pd_time[:len(err_smc_time)], err_pd_mx[:len(err_smc_time)], label='PD', lw=2)
+# plt.plot(err_smc_time[:len(err_smc_time)], err_smc_mx[:len(err_smc_time)], '--', c='orange', label="SMC", lw=2)
+# plt.plot(err_rsb_time[:len(err_smc_time)], err_rsb_mx[:len(err_smc_time)], label="RSB(proposed)", lw=2)
+# # plt.plot(err_sb_time[:len(err_sb_time)], err_sb_mx[:len(err_sb_time)], c='red', label="SB", lw=2)
+# # plt.plot([0,err_pd_time[-1]], [0,0])
+# # plt.ylabel('y_err')
+# plt.title('Moment: x')
+# plt.axis([0, err_smc_time[-1], -0.5, 0.5])
+# plt.legend(loc=3, prop={'size': 10}, ncol=4)
+# # plt.show()
+# # fig.savefig('err_y.png')
+
+
+# plt.subplot(413)
+# # plt.plot(err_pd_time[:len(err_smc_time)], err_pd_my[:len(err_smc_time)], label='PD', lw=2)
+# plt.plot(err_smc_time[:len(err_smc_time)], err_smc_my[:len(err_smc_time)], '--', c='orange', label="SMC", lw=2)
+# plt.plot(err_rsb_time[:len(err_smc_time)], err_rsb_my[:len(err_smc_time)], label="RSB(proposed)", lw=2)
+# # plt.plot(err_sb_time[:len(err_sb_time)], err_sb_my[:len(err_sb_time)], c='red', label="SB", lw=2)
+# # plt.plot([0,err_pd_time[-1]], [0,0])
+# # plt.ylabel('y_err')
+# plt.title('Moment: y')
+# plt.axis([0, err_smc_time[-1], -0.5, 0.5])
+# plt.legend(loc=3, prop={'size': 10}, ncol=4)
+# # plt.show()
+# # fig.savefig('err_y.png')
+
+
+# plt.subplot(414)
+# # plt.plot(err_pd_time[:len(err_smc_time)], err_pd_mz[:len(err_smc_time)], label='PD', lw=2)
+# plt.plot(err_smc_time[:len(err_smc_time)], err_smc_mz[:len(err_smc_time)], '--', c='orange', label="SMC", lw=2)
+# plt.plot(err_rsb_time[:len(err_smc_time)], err_rsb_mz[:len(err_smc_time)], label="RSB(proposed)", lw=2)
+# # plt.plot(err_sb_time[:len(err_sb_time)], err_sb_mz[:len(err_sb_time)], c='red', label="SB", lw=2)
+# # plt.plot([0,err_pd_time[-1]], [0,0])
+# # plt.ylabel('z_err')
+# plt.title('Moment: z')
+# plt.xlabel('time (s)')
+# plt.axis([0, err_smc_time[-1], -0.04, 0.04])
+# plt.legend(loc=3, prop={'size': 10}, ncol=4)
+
+# fig.tight_layout(h_pad=0.4)
 # plt.show()
-# fig.savefig('err_x.png')
-
-
-plt.subplot(412)
-# plt.plot(err_pd_time[:len(err_smc_time)], err_pd_mx[:len(err_smc_time)], label='PD', lw=2)
-plt.plot(err_smc_time[:len(err_smc_time)], err_smc_mx[:len(err_smc_time)], '--', c='orange', label="SMC", lw=2)
-plt.plot(err_rsb_time[:len(err_smc_time)], err_rsb_mx[:len(err_smc_time)], label="RSB(proposed)", lw=2)
-# plt.plot(err_sb_time[:len(err_sb_time)], err_sb_mx[:len(err_sb_time)], label="SB", lw=2)
-# plt.plot([0,err_pd_time[-1]], [0,0])
-# plt.ylabel('y_err')
-plt.title('Moment: x')
-plt.axis([0, err_smc_time[-1], -0.5, 0.5])
-plt.legend(loc=3, prop={'size': 10}, ncol=4)
-# plt.show()
-# fig.savefig('err_y.png')
-
-
-plt.subplot(413)
-# plt.plot(err_pd_time[:len(err_smc_time)], err_pd_my[:len(err_smc_time)], label='PD', lw=2)
-plt.plot(err_smc_time[:len(err_smc_time)], err_smc_my[:len(err_smc_time)], '--', c='orange', label="SMC", lw=2)
-plt.plot(err_rsb_time[:len(err_smc_time)], err_rsb_my[:len(err_smc_time)], label="RSB(proposed)", lw=2)
-# plt.plot(err_sb_time[:len(err_sb_time)], err_sb_my[:len(err_sb_time)], label="SB", lw=2)
-# plt.plot([0,err_pd_time[-1]], [0,0])
-# plt.ylabel('y_err')
-plt.title('Moment: y')
-plt.axis([0, err_smc_time[-1], -0.5, 0.5])
-plt.legend(loc=3, prop={'size': 10}, ncol=4)
-# plt.show()
-# fig.savefig('err_y.png')
-
-
-plt.subplot(414)
-# plt.plot(err_pd_time[:len(err_smc_time)], err_pd_mz[:len(err_smc_time)], label='PD', lw=2)
-plt.plot(err_smc_time[:len(err_smc_time)], err_smc_mz[:len(err_smc_time)], '--', c='orange', label="SMC", lw=2)
-plt.plot(err_rsb_time[:len(err_smc_time)], err_rsb_mz[:len(err_smc_time)], label="RSB(proposed)", lw=2)
-# plt.plot(err_sb_time[:len(err_sb_time)], err_sb_mz[:len(err_sb_time)], label="SB", lw=2)
-# plt.plot([0,err_pd_time[-1]], [0,0])
-# plt.ylabel('z_err')
-plt.title('Moment: z')
-plt.xlabel('time (s)')
-plt.axis([0, err_smc_time[-1], -0.04, 0.04])
-plt.legend(loc=3, prop={'size': 10}, ncol=4)
-
-fig.tight_layout(h_pad=0.4)
-plt.show()
-fig.savefig('ring_wind_control_op_exp2.png')
+# fig.savefig('ring_wind_control_op_exp3.png')
 
 
 # # fig = plt.figure(figsize=(6,12))
@@ -646,6 +646,14 @@ fig.savefig('ring_wind_control_op_exp2.png')
 # fig.tight_layout(h_pad=0.4)
 # plt.show()
 # fig.savefig('ring_wind_error_att_exp2.png')
+
+
+np.savetxt('rsb_data.txt', (odom_rsb_time, odom_rsb_x, odom_rsb_y, odom_rsb_z), delimiter=',')
+np.savetxt('smc_data.txt', (odom_smc_time, odom_smc_x, odom_smc_y, odom_smc_z), delimiter=',')
+np.savetxt('rsb_control.txt', (err_rsb_time, err_rsb_thrust, err_rsb_mx, err_rsb_my, err_rsb_mz), delimiter=',')
+np.savetxt('smc_control.txt', (err_smc_time, err_smc_thrust, err_smc_mx, err_smc_my, err_smc_mz), delimiter=',')
+np.savetxt('rsb_error.txt', (err_rsb_time, err_rsb_x, err_rsb_y, err_rsb_z, err_rsb_phi, err_rsb_theta, err_rsb_psi), delimiter=',')
+np.savetxt('smc_error.txt', (err_smc_time, err_smc_x, err_smc_y, err_smc_z, err_smc_phi, err_smc_theta, err_smc_psi), delimiter=',')
 
 RSME_rsb_ = np.zeros(3)
 RSME_rsb_[0] = np.sqrt(np.mean([x**2 for x in err_rsb_x]))
