@@ -38,8 +38,7 @@
 
 #include "rrc_control/common.h"
 #include "rrc_control/pid_position_controller.h"
-#include "msg_check/PlotDataMsg.h"
-#include <serial_comm.h>
+#include "rrc_control/PlotDataMsg.h"
 
 
 namespace rrc_control {
@@ -59,8 +58,7 @@ class PidPositionControllerNode {
   ros::NodeHandle nhs_;
 
   PidPositionController pid_position_controller_;
-  msg_check::PlotDataMsg data_out_;
-  SerialComm comm_;
+  rrc_control::PlotDataMsg data_out_;
 
   std::string namespace_;
 

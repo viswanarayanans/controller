@@ -20,7 +20,6 @@
 #include "rrc_control/common.h"
 #include "rrc_control/elas_smc_position_controller.h"
 #include "msg_check/PlotDataMsg.h"
-#include <serial_comm.h>
 
 
 namespace rrc_control {
@@ -36,7 +35,6 @@ namespace rrc_control {
 
 		ElasSmcPositionController position_controller_;
 		msg_check::PlotDataMsg data_out_;
-  		SerialComm comm_;
 
 		ros::Subscriber cmd_mdj_traj_sub_;
 		ros::Subscriber cmd_odom_sub_;

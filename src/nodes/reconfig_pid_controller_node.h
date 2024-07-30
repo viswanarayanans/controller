@@ -40,7 +40,6 @@
 #include "rrc_control/reconfig_pid_controller.h"
 #include "msg_check/PlotDataMsg.h"
 #include "msg_check/BoxMsg.h"
-#include <serial_comm.h>
 
 
 namespace rrc_control {
@@ -61,7 +60,6 @@ class ReconfigPidControllerNode {
 
   ReconfigPidController reconfig_pid_controller_;
   msg_check::PlotDataMsg data_out_;
-  SerialComm comm_;
 
   std::string namespace_;
 

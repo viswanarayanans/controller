@@ -1,0 +1,2 @@
+float32 mass
+geometric_msgs/Vector3 dimension

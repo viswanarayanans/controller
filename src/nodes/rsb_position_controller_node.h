@@ -39,8 +39,6 @@
 #include "rrc_control/common.h"
 #include "rrc_control/rsb_position_controller.h"
 #include "msg_check/PlotDataMsg.h"
-#include <serial_comm.h>
-
 
 namespace rrc_control {
 
@@ -60,8 +58,6 @@ class RsbPositionControllerNode {
 
   RsbPositionController rsb_position_controller_;
   msg_check::PlotDataMsg data_out_;
-  SerialComm comm_;
-
   std::string namespace_;
 
   // subscribers

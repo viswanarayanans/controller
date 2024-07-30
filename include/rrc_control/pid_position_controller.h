@@ -27,7 +27,7 @@
 
 #include "rrc_control/common.h"
 #include "rrc_control/parameters.h"
-#include "msg_check/PlotDataMsg.h"
+#include "rrc_control/PlotDataMsg.h"
 
 
 namespace rrc_control {
@@ -65,7 +65,7 @@ class PidPositionController {
   PidPositionController();
   ~PidPositionController();
   void InitializeParameters();
-  void CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities, msg_check::PlotDataMsg* data_out) const;
+  void CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities, rrc_control::PlotDataMsg* data_out) const;
 
   void SetOdometry(const EigenOdometry& odometry);
   // void UpdateMassAndInertia(double new_mass); //Added by Viswa
@@ -94,8 +94,8 @@ class PidPositionController {
 
 
   void ComputeDesiredAngularAcc(const Eigen::Vector3d& acceleration,
-                                Eigen::Vector3d* angular_acceleration, msg_check::PlotDataMsg* data_out) const;
-  void ComputeDesiredAcceleration(Eigen::Vector3d* acceleration, msg_check::PlotDataMsg* data_out) const;
+                                Eigen::Vector3d* angular_acceleration, rrc_control::PlotDataMsg* data_out) const;
+  void ComputeDesiredAcceleration(Eigen::Vector3d* acceleration, rrc_control::PlotDataMsg* data_out) const;
 };
 }
 

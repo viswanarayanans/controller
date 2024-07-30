@@ -62,7 +62,7 @@ void PidPositionController::InitializeParameters() {
 }
 
 void PidPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities, 
-      msg_check::PlotDataMsg* data_out) const {
+      rrc_control::PlotDataMsg* data_out) const {
   assert(rotor_velocities);
   assert(initialized_params_);
 
@@ -114,7 +114,7 @@ void PidPositionController::SetTrajectoryPoint(
 }
 
 void PidPositionController::ComputeDesiredAcceleration(Eigen::Vector3d* acceleration, 
-  msg_check::PlotDataMsg* data_out) const {
+  rrc_control::PlotDataMsg* data_out) const {
   assert(acceleration);
 
   Eigen::Vector3d position_error;
@@ -155,7 +155,7 @@ void PidPositionController::ComputeDesiredAcceleration(Eigen::Vector3d* accelera
 // Control of complex maneuvers for a quadrotor UAV using geometric methods on SE(3)
 void PidPositionController::ComputeDesiredAngularAcc(const Eigen::Vector3d& acceleration,
                                                      Eigen::Vector3d* angular_acceleration, 
-                                                     msg_check::PlotDataMsg* data_out) const {
+                                                     rrc_control::PlotDataMsg* data_out) const {
   assert(angular_acceleration);
 
   Eigen::Matrix3d R = odometry_.orientation.toRotationMatrix();
