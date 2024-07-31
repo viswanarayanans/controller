@@ -37,8 +37,8 @@
 
 #include "rrc_control/common.h"
 #include "rrc_control/reconfig_pid_controller.h"
-#include "msg_check/PlotDataMsg.h"
-#include "msg_check/BoxMsg.h"
+#include "rrc_control/PlotDataMsg.h"
+#include "rrc_control/BoxMsg.h"
 
 namespace rrc_control {
 
@@ -57,7 +57,7 @@ class ReconfigPidControllerNode {
   ros::NodeHandle nhs_;
 
   ReconfigPidController reconfig_pid_controller_;
-  msg_check::PlotDataMsg data_out_;
+  rrc_control::PlotDataMsg data_out_;
 
   std::string namespace_;
 
@@ -90,7 +90,7 @@ class ReconfigPidControllerNode {
 
   void PoseCallback(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg);
    //void TagCallback(const apriltag_ros::AprilTagDetectionArray::ConstPtr& msg);
-  void BoxCallback(const msg_check::BoxMsgPtr& box_data);
+  void BoxCallback(const rrc_control::BoxMsgPtr& box_data);
 
 };
 }

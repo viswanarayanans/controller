@@ -73,7 +73,7 @@
 #include "rrc_control/common.h"
 #include "rrc_control/common_1.h"
 #include "rrc_control/parameters_ros.h"
-#include "msg_check/PlotDataMsg.h"
+#include "rrc_control/PlotDataMsg.h"
 
 #define ERROR_QUATERNION 1
 #define ERROR_GEOMETRIC 2

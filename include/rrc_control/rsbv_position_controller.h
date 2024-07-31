@@ -27,7 +27,7 @@
 
 #include "rrc_control/common.h"
 #include "rrc_control/parameters.h"
-#include "msg_check/PlotDataMsg.h"
+#include "rrc_control/PlotDataMsg.h"
 
 
 namespace rrc_control {
@@ -97,7 +97,7 @@ class RsbvPositionController {
   RsbvPositionController();
   ~RsbvPositionController();
   void InitializeParameters();
-  void CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities, msg_check::PlotDataMsg* data_out) const;
+  void CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities, rrc_control::PlotDataMsg* data_out) const;
 
   void SetOdometry(const EigenOdometry& odometry);
   // void UpdateMassAndInertia(double new_mass); //Added by Viswa
@@ -125,8 +125,8 @@ class RsbvPositionController {
   EigenOdometry odometry_;
 
 
-  void CalculateMoments(Eigen::Vector3d force, Eigen::Vector3d* moments, msg_check::PlotDataMsg* data_out) const;
-  void CalculateThrust(Eigen::Vector3d* thrust, msg_check::PlotDataMsg* data_out) const;
+  void CalculateMoments(Eigen::Vector3d force, Eigen::Vector3d* moments, rrc_control::PlotDataMsg* data_out) const;
+  void CalculateThrust(Eigen::Vector3d* thrust, rrc_control::PlotDataMsg* data_out) const;
   double Sigmoid(double s, double var_pi) const;
 };
 }
