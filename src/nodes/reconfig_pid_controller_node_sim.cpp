@@ -63,7 +63,7 @@ ReconfigPidControllerNode::ReconfigPidControllerNode(
   motor_velocity_reference_pub_ = nh_.advertise<mav_msgs::Actuators>(
     "/elasticopter/command/motor_speed", 1);
 
-  plot_data_pub_ = nh_.advertise<msg_check::PlotDataMsg>("/data_out", 1);
+  plot_data_pub_ = nh_.advertise<rrc_control::PlotDataMsg>("/data_out", 1);
 
   command_timer_ = nh_.createTimer(ros::Duration(0), &ReconfigPidControllerNode::TimedCommandCallback, this,
                                   true, false);
@@ -171,7 +171,7 @@ void ReconfigPidControllerNode::InitializeParams() {
 void ReconfigPidControllerNode::Publish() {
 }
 
-void ReconfigPidControllerNode::BoxCallback(const msg_check::BoxMsgPtr& box_data){
+void ReconfigPidControllerNode::BoxCallback(const rrc_control::BoxMsgPtr& box_data){
   Eigen::Vector3d dim;
   tf::vectorMsgToEigen(box_data->dimension, dim);
   reconfig_pid_controller_.ResetParameters(box_data->mass, &dim);

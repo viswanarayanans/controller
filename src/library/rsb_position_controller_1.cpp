@@ -49,7 +49,7 @@ void RsbPositionController::InitializeParameters() {
 }
 
 void RsbPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities, 
-      msg_check::PlotDataMsg* data_out) const {
+      rrc_control::PlotDataMsg* data_out) const {
   assert(rotor_velocities);
   assert(initialized_params_);
 
@@ -97,7 +97,7 @@ void RsbPositionController::SetTrajectoryPoint(
 }
 
 void RsbPositionController::CalculateThrust(Eigen::Vector3d* thrust, 
-  msg_check::PlotDataMsg* data_out) const {
+  rrc_control::PlotDataMsg* data_out) const {
   assert(thrust);
 
   Eigen::Vector3d position_error;
@@ -170,7 +170,7 @@ void RsbPositionController::CalculateThrust(Eigen::Vector3d* thrust,
 // Control of complex maneuvers for a quadrotor UAV using geometric methods on SE(3)
 void RsbPositionController::CalculateMoments(Eigen::Vector3d force, 
                         Eigen::Vector3d* moments, 
-                        msg_check::PlotDataMsg* data_out) const {
+                        rrc_control::PlotDataMsg* data_out) const {
   assert(moments);
   // ROS_INFO_STREAM("force" << force); 
   if (force[2] >= DBL_MAX || force[2] <= -DBL_MAX) {

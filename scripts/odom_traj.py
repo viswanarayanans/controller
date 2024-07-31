@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from trajectory_msgs.msg import MultiDOFJointTrajectory
 from nav_msgs.msg import Odometry
-from msg_check.msg import PlotDataMsg
+from rrc_control.msg import PlotDataMsg
 
 
 def traj_callback(data):

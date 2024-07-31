@@ -22,7 +22,7 @@ namespace rrc_control {
 		motor_vel_pub_ = nh_.advertise<mav_msgs::Actuators>(
 			mav_msgs::default_topics::COMMAND_ACTUATORS, 1);
 
-  		plot_data_pub_ = nh_.advertise<msg_check::PlotDataMsg>("/data_out", 1);
+  		plot_data_pub_ = nh_.advertise<rrc_control::PlotDataMsg>("/data_out", 1);
 
 
 		command_timer_ = nh_.createTimer(ros::Duration(0), &SmcPositionControllerNode::TimedCallback, this,

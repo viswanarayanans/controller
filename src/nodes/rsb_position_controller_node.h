@@ -38,7 +38,7 @@
 
 #include "rrc_control/common.h"
 #include "rrc_control/rsb_position_controller.h"
-#include "msg_check/PlotDataMsg.h"
+#include "rrc_control/PlotDataMsg.h"
 
 namespace rrc_control {
 
@@ -57,7 +57,7 @@ class RsbPositionControllerNode {
   ros::NodeHandle nhs_;
 
   RsbPositionController rsb_position_controller_;
-  msg_check::PlotDataMsg data_out_;
+  rrc_control::PlotDataMsg data_out_;
   std::string namespace_;
 
   // subscribers

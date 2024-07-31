@@ -59,7 +59,7 @@ void SacPositionController::InitializeParameters() {
 }
 
 void SacPositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities, 
-                        msg_check::PlotDataMsg* data_out) {
+                        rrc_control::PlotDataMsg* data_out) {
   assert(rotor_velocities);
   assert(initialized_params_);
 
@@ -113,7 +113,7 @@ void SacPositionController::SetTrajectoryPoint(
 }
 
 void SacPositionController::CalculateThrust(Eigen::Vector3d* thrust, 
-                        msg_check::PlotDataMsg* data_out) {
+                        rrc_control::PlotDataMsg* data_out) {
   assert(thrust);
 
   Eigen::Vector3d position_error;
@@ -291,7 +291,7 @@ void SacPositionController::CalculateThrust(Eigen::Vector3d* thrust,
 // Control of complex maneuvers for a quadrotor UAV using geometric methods on SE(3)
 void SacPositionController::CalculateMoments(Eigen::Vector3d force, 
 												Eigen::Vector3d* moments, 
-                        msg_check::PlotDataMsg* data_out) {
+                        rrc_control::PlotDataMsg* data_out) {
   assert(moments);
   // ROS_INFO_STREAM("force" << force);	
   if (force[2] >= DBL_MAX || force[2] <= -DBL_MAX) {
