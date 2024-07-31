@@ -224,7 +224,6 @@ void SbPositionControllerNode::OdometryCallback(const nav_msgs::OdometryConstPtr
 
 
   motor_velocity_reference_pub_.publish(actuator_msg);
-  comm_.sendSerial(ref_rotor_velocities);
   plot_data_pub_.publish(data_out_);
 }
                                                   
@@ -249,7 +248,6 @@ void SbPositionControllerNode::PoseCallback(const geometry_msgs::PoseWithCovaria
 
 
   motor_velocity_reference_pub_.publish(actuator_msg);
-  // comm_.sendSerial(ref_rotor_velocities);
   plot_data_pub_.publish(data_out_);
 }
 

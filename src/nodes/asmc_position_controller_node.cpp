@@ -236,7 +236,6 @@ namespace rrc_control {
 		data_out_.header.stamp = odometry_msg->header.stamp;
 
 		motor_vel_pub_.publish(actuator_msg);
-		comm_.sendSerial(ref_rotor_velocities);
 		plot_data_pub_.publish(data_out_);
 
 	}
@@ -280,7 +279,6 @@ namespace rrc_control {
 	  data_out_.header.stamp = msg->header.stamp;
 
 	  motor_vel_pub_.publish(actuator_msg);
-	  // comm_.sendSerial(ref_rotor_velocities);
 	  plot_data_pub_.publish(data_out_);
 	}
 
