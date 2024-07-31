@@ -27,8 +27,8 @@
 
 #include "rrc_control/common.h"
 #include "rrc_control/parameters.h"
-#include "msg_check/PlotDataMsg.h"
-#include "msg_check/BoxMsg.h"
+#include "rrc_control/PlotDataMsg.h"
+#include "rrc_control/BoxMsg.h"
 
 
 namespace rrc_control {
@@ -114,7 +114,7 @@ class ReconfigPidController {
   ~ReconfigPidController();
   void InitializeParameters();
   void ResetParameters(double box_mass, Eigen::Vector3d* box_dim);
-  void CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities, msg_check::PlotDataMsg* data_out) const;
+  void CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities, rrc_control::PlotDataMsg* data_out) const;
 
   void SetOdometry(const EigenOdometry& odometry);
   // void UpdateMassAndInertia(double new_mass); //Added by Viswa
@@ -143,8 +143,8 @@ class ReconfigPidController {
 
 
   void ComputeDesiredAngularAcc(const Eigen::Vector3d& acceleration,
-                                Eigen::Vector3d* angular_acceleration, msg_check::PlotDataMsg* data_out) const;
-  void ComputeDesiredAcceleration(Eigen::Vector3d* acceleration, msg_check::PlotDataMsg* data_out) const;
+                                Eigen::Vector3d* angular_acceleration, rrc_control::PlotDataMsg* data_out) const;
+  void ComputeDesiredAcceleration(Eigen::Vector3d* acceleration, rrc_control::PlotDataMsg* data_out) const;
 };
 }
 

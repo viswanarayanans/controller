@@ -7,7 +7,7 @@
 
 #include "rrc_control/common.h"
 #include "rrc_control/parameters.h"
-#include "msg_check/PlotDataMsg.h"
+#include "rrc_control/PlotDataMsg.h"
 
 
 namespace rrc_control {
@@ -91,11 +91,11 @@ namespace rrc_control {
 		void InitializeParameters();
 		double Sigmoid(double s, double var_pi) const;
 		void CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities, 
-                        			msg_check::PlotDataMsg* data_out) const;
+                        			rrc_control::PlotDataMsg* data_out) const;
 		void CalculateThrust(Eigen::Vector3d* thrust, 
-                        		msg_check::PlotDataMsg* data_out) const;
+                        		rrc_control::PlotDataMsg* data_out) const;
 		void CalculateMoments(Eigen::Vector3d thrust, Eigen::Vector3d* moments, 
-                        		msg_check::PlotDataMsg* data_out) const;
+                        		rrc_control::PlotDataMsg* data_out) const;
 		void SetOdometry(const EigenOdometry& odometry);
 		void SetTrajectoryPoint(
 		  const mav_msgs::EigenTrajectoryPoint& command_trajectory);
