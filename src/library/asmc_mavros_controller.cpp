@@ -17,8 +17,6 @@ ASmcMavrosController::ASmcMavrosController(const ros::NodeHandle &nh, const ros:
       node_state(WAITING_FOR_HOME_POSE) {
   referenceSub_ =
       nh_.subscribe("reference/setpoint", 1, &ASmcMavrosController::targetCallback, this, ros::TransportHints().tcpNoDelay());
-  flatreferenceSub_ = nh_.subscribe("reference/flatsetpoint", 1, &ASmcMavrosController::flattargetCallback, this,
-                                    ros::TransportHints().tcpNoDelay());
   yawreferenceSub_ =
       nh_.subscribe("reference/yaw", 1, &ASmcMavrosController::yawtargetCallback, this, ros::TransportHints().tcpNoDelay());
   multiDOFJointSub_ = nh_.subscribe("command/trajectory", 1, &ASmcMavrosController::multiDOFJointCallback, this,
@@ -110,40 +108,6 @@ void ASmcMavrosController::targetCallback(const geometry_msgs::TwistStamped &msg
     targetAcc_ = (targetVel_ - targetVel_prev_) / reference_request_dt_;
   else
     targetAcc_ = Eigen::Vector3d::Zero();
-}
-
-void ASmcMavrosController::flattargetCallback(const controller_msgs::FlatTarget &msg) {
-  reference_request_last_ = reference_request_now_;
-
-  targetPos_prev_ = targetPos_;
-  targetVel_prev_ = targetVel_;
-
-  reference_request_now_ = ros::Time::now();
-  reference_request_dt_ = (reference_request_now_ - reference_request_last_).toSec();
-
-  targetPos_ = toEigen(msg.position);
-  targetVel_ = toEigen(msg.velocity);
-
-  if (msg.type_mask == 1) {
-    targetAcc_ = toEigen(msg.acceleration);
-    targetJerk_ = toEigen(msg.jerk);
-    targetSnap_ = Eigen::Vector3d::Zero();
-
-  } else if (msg.type_mask == 2) {
-    targetAcc_ = Eigen::Vector3d::Zero();
-    targetJerk_ = Eigen::Vector3d::Zero();
-    targetSnap_ = Eigen::Vector3d::Zero();
-
-  } else if (msg.type_mask == 4) {
-    targetAcc_ = Eigen::Vector3d::Zero();
-    targetJerk_ = Eigen::Vector3d::Zero();
-    targetSnap_ = Eigen::Vector3d::Zero();
-
-  } else {
-    targetAcc_ = toEigen(msg.acceleration);
-    targetJerk_ = toEigen(msg.jerk);
-    targetSnap_ = toEigen(msg.snap);
-  }
 }
 
 void ASmcMavrosController::yawtargetCallback(const std_msgs::Float32 &msg) {

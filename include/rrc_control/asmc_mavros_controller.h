@@ -63,7 +63,6 @@
 #include <std_msgs/Float32.h>
 #include <Eigen/Dense>
 
-#include <controller_msgs/FlatTarget.h>
 #include <dynamic_reconfigure/server.h>
 // #include <geometric_controller/GeometricControllerConfig.h>
 #include <std_srvs/SetBool.h>
@@ -98,7 +97,6 @@ class ASmcMavrosController {
   ros::NodeHandle nh_;
   ros::NodeHandle nh_private_;
   ros::Subscriber referenceSub_;
-  ros::Subscriber flatreferenceSub_;
   ros::Subscriber multiDOFJointSub_;
   ros::Subscriber mavstateSub_;
   ros::Subscriber mavposeSub_, gzmavposeSub_;
@@ -156,7 +154,6 @@ class ASmcMavrosController {
   void appendPoseHistory();
   void odomCallback(const nav_msgs::OdometryConstPtr &odomMsg);
   void targetCallback(const geometry_msgs::TwistStamped &msg);
-  void flattargetCallback(const controller_msgs::FlatTarget &msg);
   void yawtargetCallback(const std_msgs::Float32 &msg);
   void multiDOFJointCallback(const trajectory_msgs::MultiDOFJointTrajectory &msg);
   void keyboardCallback(const geometry_msgs::Twist &msg);
