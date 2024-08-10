@@ -25,6 +25,7 @@ find_package(Eigen REQUIRED)
    FILES
    PlotDataMsg.msg
    BoxMsg.msg
+   PosVelMsg.msg
  )
 
 generate_messages(
